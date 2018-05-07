@@ -3,7 +3,7 @@ var path = require('path');
 
 var fs = require('fs');
 
-mongoose.connect('mongodb://localhost/app');
+mongoose.connect('mongodb://localhost/captain');
 
 var models_path = path.join(__dirname, './../models');
 
