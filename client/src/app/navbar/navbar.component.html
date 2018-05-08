@@ -8,51 +8,90 @@
     </div>
 
     <div class="navbar-form navbar-right">
-      <button type="submit" class="btn btn-primary">Captain/Student Registration</button>
-      
+      <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#regModal">Captain/Student Registration</button>
+
       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">Login</button>
-
-
     </div>
   </div>
 </nav>
 
-
 <!-- Modal -->
-<div class="modal fade" id="loginModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div style="text-align: center">
-          <span></span>
-        </div>
-        <br/>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="">Your Name</label>
-              <input type="text" class="form-control" id="name" name="">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="text" class="form-control" id="email" name="">
-            </div>
-            <div class="form-group">
-              <label for="email">Phone Number</label>
-              <input type="text" class="form-control" id="email" name="">
-            </div>
-            <div class="form-group">
-              <label for="email">Company (as applicable)</label>
-              <input type="text" class="form-control" id="email" name="">
-            </div>
-            <label for="email">Message</label>
-            <textarea class="form-control" rows="5" style="min-width: 100%" name=""></textarea>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-info">Submit</button>
-            </div>
-            <br/>
-          </form>
-        </div>
+<div class="modal fade" id="regModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="text-align: center">
+        <span></span>
+      </div>
+      <br/>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="">Your Name</label>
+            <input type="text" class="form-control" id="name" name="">
+          </div>
+          <div class="form-group">
+            <label for="">Email Address</label>
+            <input type="text" class="form-control" required pattern="[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]*\.([a-z]{2,4})" name="">
+          </div>
+          <div class="form-group">
+            <label for="">Phone</label>
+            <input type="tel" class="form-control" id="name" name="">
+          </div>
+          <div class="form-group">
+            <label for="">Address</label>
+            <input type="text" class="form-control" id="name" name="">
+          </div>
+          <div class="form-group">
+            <label for="">City</label>
+            <input type="text" class="form-control" id="name" name="">
+          </div>
+          <div class="form-group">
+            <label for="">State</label>
+            <input type="text" class="form-control" id="name" name="">
+          </div>
+          <div class="form-group">
+            <label for="">Zip</label>
+            <input type="text" class="form-control" id="name" name="">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="text" class="form-control" required minlength="4" name="">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-info">Submit</button>
+          </div>
+          <br/>
+        </form>
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade" id="loginModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="text-align: center">
+        <span></span>
+      </div>
+      <br/>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="">Your Name</label>
+            <input type="text" class="form-control" id="name" name="">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="text" class="form-control" name="">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-info">Submit</button>
+          </div>
+          <br/>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
