@@ -1,0 +1,25 @@
+.container{
+    background-color: rgb(15, 14, 14);
+    position: relative;
+}
+
+.content {
+    text-align:center;
+}
+
+.left {
+    float:left;
+    color: yellow;
+}
+.right {
+    float:right;
+    color: yellow;
+}
+.center {
+    text-align:center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
