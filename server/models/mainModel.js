@@ -25,8 +25,9 @@ var UserInfoSchema = new mongoose.Schema({
 var UserInfo = mongoose.model("UserInfo", UserInfoSchema);
 
 var StudentEventSchema = new mongoose.Schema({
-  date: {type: String, required: true},
-  time_range: {type: String, required: true},
+  date: {type: Date, required: true},
+  title: {type: String},
+  time_range: {type: Date, required: true},
   message: {type: String, required: true},
   created_by: {type: Schema.Types.ObjectId, ref: "User"},
   people_joined: [{ type: Schema.Types.ObjectId, ref: "User" }]
@@ -34,8 +35,9 @@ var StudentEventSchema = new mongoose.Schema({
 var StudentEvent = mongoose.model("StudentEvent", StudentEventSchema);
 
 var CaptainEventSchema = new mongoose.Schema({
-  date: { type: String, required: true },
-  time_range: { type: String, required: true },
+  date: { type: Date, required: true },
+  title: {type: String},  
+  time_range: { type: Date, required: true },
   message: { type: String, required: true },
   created_by: { type: Schema.Types.ObjectId, ref: "User" },
   people_joined: [{ type: Schema.Types.ObjectId, ref: "User" }],
