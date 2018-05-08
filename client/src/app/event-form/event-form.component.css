@@ -2,14 +2,18 @@
     margin: 5px auto;
 }
 
-.row{
-    width: 40%;
-    margin: auto;
-}
-
 .textarea {
 	width: 350px;
 	height: 120px;
 	border: 2px solid #cccccc;
 	padding: 5px;
+}
+
+fieldset{
+	border: 2px solid black;
+	padding: 20px;
+}
+
+legend{
+	text-align: center;
 }

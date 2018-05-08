@@ -1,7 +1,7 @@
 <!-- if login as captain to seek crew -->
 <div class="CaptainSeekingCrew row">
   <form>
-    <fieldset class="form-group">
+    <fieldset>
       <legend>Schedule a Sail</legend>
       <p>You Are Logged in as </p>
       <label>When you're setting sail:</label>
@@ -14,7 +14,7 @@
       <label for="">Specs:</label><br>
       <textarea class="textarea" name="comment" form="usrform"></textarea><br>
       <label for="">Number of Crew You Seek:</label><br>
-      <input id="number" type="number"><br>
+      <input id="number" type="number" min="1"><br>
       <label for="">Captains Log(Message):</label><br>
       <textarea class="textarea" name="comment" form="usrform"></textarea>
     </fieldset>

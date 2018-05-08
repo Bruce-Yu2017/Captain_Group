@@ -29,7 +29,8 @@ export class CalendarComponent implements OnInit {
         }],
   
         dayClick: function() {
-          alert('a day has been clicked!');
+          $('#calendarModal').modal();
+          // alert('a day has been clicked!');
         }
       });
     
