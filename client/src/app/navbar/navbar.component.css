@@ -1,8 +1,13 @@
 img {
-    display: block;
-    width: 35px;
+    width: 55px;
 }
 
 nav {
     margin: 0px;
+    background-color: #a8e6ff;
+}
+.btn-primary {
+    color: #fff;
+    background-color: black;
+    border: 2px solid #001f94;
 }

@@ -1,0 +1,82 @@
+/* Top Container */
+.top-container {
+    display: grid;
+    padding: 1em;
+    grid-gap: 20px;
+    grid-template-areas: 
+    'top-box-a showcase showcase'
+    'top-box-b showcase showcase ';
+}
+
+/* Showcasa */
+
+.showcase {
+    grid-area: showcase;
+    width: 500px;
+    min-height: 400px;
+    background: url(/assets/images/rainbow.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 3rem; 
+    display: flex;
+    flex-direction: column; 
+    align-items: start;
+    justify-content: center;
+    box-shadow: var(--shadow);
+}
+
+.showcase h1 {
+    font-size: 4rem;
+    margin-bottom: 0;
+}
+
+.showcase p {
+    font-size: 1.3rem;
+    margin-top: 0;
+}
+
+.showcase1 {
+    grid-area: showcase;
+    width: 500px;
+    min-height: 400px;
+    background: url(/assets/images/whiteboat.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 3rem; 
+    display: flex;
+    flex-direction: column; 
+    align-items: start;
+    justify-content: center;
+    box-shadow: var(--shadow);
+}
+
+.showcase2 {
+    grid-area: showcase;
+    width: 500px;
+    min-height: 400px;
+    background: url(/assets/images/boat.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 3rem; 
+    display: flex;
+    flex-direction: column; 
+    align-items: start;
+    justify-content: center;
+    box-shadow: var(--shadow);
+}
+
+/* Top Box */
+
+.top-box {
+    background-color: #ddd;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+    padding: 1.5rem;
+    border: 2px solid black;
+}
+
+.top-box .content {
+    font-size: 1rem;
+}
