@@ -15,6 +15,13 @@ module.exports = function(app){
     mainroutes.login(req, res);
   });
 
+
+  app.get("/activate/:token", function(req, res) {
+    mainroutes.activate(req, res);
+  })
+
+}
+
   // create student event
   app.post('/studentevents', function(req, res){
     studentEvent.create(req, res);
@@ -31,3 +38,4 @@ module.exports = function(app){
   });
 
 };
+
