@@ -12,7 +12,7 @@ export class MainService {
 
   constructor(private _http: Http) {
     if (localStorage.currentUser !== undefined) {
-      console.log(this.currentUser);
+      // console.log(this.currentUser);
       this.currentUser = JSON.parse(localStorage.currentUser);
     }
   }
@@ -115,6 +115,10 @@ export class MainService {
       (err) => {
         console.log("error from login service: ", err);
       })
+  }
+
+  logout() {
+    localStorage.removeItem("currentUser");
   }
 
 }

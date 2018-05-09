@@ -10,7 +10,11 @@ declare var $: any;
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
+
 export class NavbarComponent implements OnInit {
+  logged_user;
+
   captain_reg = {
     name: "",
     identity: "captain",
@@ -104,6 +108,9 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this._service.currentUser !== null) {
+      this.logged_user = this._service.currentUser.name; 
+    }
     $('#student').hide();
     $('#reg1').hide();
 
@@ -122,11 +129,21 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  display_login() {
+    $("#loginForm").fadeIn();
+  }
+
+  closeModal() {
+    $("#loginForm").fadeOut();
+  }
+
   login() {
     this._service.login(this.user_log, 
       (res) => {
         if(res.error == undefined) {
-          this._router.navigate(['/']);
+          this.logged_user = res.name;
+          this.closeModal()
+
         }
         else {
           this.error_message.login = res.error;
@@ -139,6 +156,11 @@ export class NavbarComponent implements OnInit {
       email: "",
       password: ""
     };
+  }
+
+  logout() {
+    this._service.logout();
+    this.logged_user = undefined;
   }
 
 

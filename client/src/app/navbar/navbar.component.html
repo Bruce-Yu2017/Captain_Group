@@ -9,11 +9,12 @@
     </div>
 
     <div class="navbar-form navbar-right">
-      <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#regModal">
+      <span *ngIf = "logged_user !== undefined ">Hi, {{logged_user}}</span>
+      <button *ngIf = "logged_user == undefined" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#regModal">
        <i class="ion-android-boat"></i> Captain/Student Registration</button>
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
+      <button *ngIf = "logged_user == undefined" type="button" class="btn btn-success" (click) ="display_login()">
        <i class="ion-person"></i> Login</button>
-      <button type="button" class="btn btn-danger">
+      <button *ngIf = "logged_user !== undefined " type="button" class="btn btn-danger" (click) = "logout()">
       <i class="ion-person"></i> Logout</button>
     </div>
   </div>
@@ -250,53 +251,47 @@
 </div>
 
 <!-- Login Form -->
-<div class="modal fade" id="loginModal" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div style="text-align: center">
-        <span></span>
+
+<div id="loginForm" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <form (submit)="login()" #formLogin="ngForm" id="login-form" role="form">
+    
+      <div class="form-group">
+        <label for="">Your Email: </label>
+        <input type="text" class="form-control" id="login-username" placeholder="Enter Email..." name="email" [(ngModel)]="user_log.email"
+          #log_email="ngModel" required>
+        <div *ngIf="log_email.invalid && (log_email.dirty || log_email.touched)">
+          <div class="alert alert-dismissible alert-danger aler_log" role="alert">
+            <div *ngIf="log_email.errors.required">
+              <span> Email is required.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <label>Password</label>
+        <input id="login-password" type="password" class="form-control" placeholder="Enter Password..." name="password" [(ngModel)]="user_log.password"
+          #log_password="ngModel" required>
+        <div *ngIf="log_password.invalid && (log_password.dirty || log_password.touched)">
+          <div class="alert alert-dismissible alert-danger aler_log" role="alert">
+            <div *ngIf="log_password.errors.required">
+              <span> Password is required.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" *ngIf="error_message.code == 404">Send Activation Email</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click) ="closeModal()">Close</button>
+        <button id="btn-login" [disabled]="formLogin.invalid" data-toggle="modal" class="btn btn-success">Submit</button>
+      </div>
+      <div class="alert alert-dismissible alert-danger aler_log" role="alert" *ngIf="error_message.login != ''">
+        {{error_message.login}}
       </div>
       <br/>
-      <div class="modal-body">
-        <form (submit)="login()" #formLogin="ngForm" id="login-form" role="form">
-
-          <div class="form-group">
-            <label for="">Your Email: </label>
-            <input type="text" class="form-control" id="login-username" placeholder="Enter Email..." name="email" [(ngModel)]="user_log.email"
-                #log_email="ngModel" required>
-            <div *ngIf="log_email.invalid && (log_email.dirty || log_email.touched)">
-              <div class="alert alert-dismissible alert-danger aler_log" role="alert">
-                <div *ngIf="log_email.errors.required">
-                  <span> Email is required.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Password</label>
-            <input id="login-password" type="password" class="form-control" placeholder="Enter Password..." name="password" [(ngModel)]="user_log.password"
-                #log_password="ngModel" required>
-            <div *ngIf="log_password.invalid && (log_password.dirty || log_password.touched)">
-              <div class="alert alert-dismissible alert-danger aler_log" role="alert">
-                <div *ngIf="log_password.errors.required">
-                  <span> Password is required.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-info" *ngIf="error_message.code == 404" >Send Activation Email</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <button id="btn-login" [disabled]="formLogin.invalid" class="btn btn-success">Submit</button>
-          </div>
-          <div class="alert alert-dismissible alert-danger aler_log" role="alert" *ngIf="error_message.login != ''">
-              {{error_message.login}}
-            </div>
-          <br/>
-        </form>
-      </div>
-    </div>
+    </form>
   </div>
 </div>
 
