@@ -11,29 +11,38 @@ body {
     padding: 0;
     position: relative;
     height: 100vh;
+    width: 100%;
+}
+
+#service {
+    background-color: #1a1e23;
+    color: bisque;
 }
 
 .showcase {
-    grid-area: showcase;
-    min-height: 400px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    left: 50% !important;
+    margin: auto;
 }
 
-.showcase h1 {
-    font-size: 4rem;
-    margin-bottom: 0;
-    color: black;
+.center {
+    margin: auto;
 }
 
 button {
     background-color: Transparent;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     cursor: pointer;
     overflow: hidden;
     color: #fff;
     margin: 3vh 1vw !important;
     padding: 0.6rem 1.3rem;
     border: 2px solid #fff;
-    font-size: 2.5em;
+    font-size: 2em;
+    width: 350px;
 }
 
 button:hover {
@@ -45,4 +54,72 @@ button:hover {
     box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
     outline: none;
     text-shadow: 1px 1px 2px #427388;
+}
+
+h1 {
+    color: #fff;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 5rem;
+    font-weight: bold;
+    border-right: 4px solid rgba(255, 255, 255, 0);
+    text-shadow:2px 2px 0 rgba(0,0,0,.75);
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 10s steps(27) forwards, blink-caret .8s step-end infinite;
+    animation-iteration-count: infinite;
+}
+
+
+
+ /* Scroll Up Arrow */
+#return-to-top {
+    font-size: 50px;
+    color: #fff;
+    position: fixed;
+    border: 5px solid #fff;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    width:1.5em;
+    height:1.5em;
+    text-align: center;
+    border-radius: 50%;
+}
+
+
+#return-to-top:hover {
+  border: 1px solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #427388; 
+}
+
+@keyframes blink-caret {
+    from,
+    to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #fff;
+    }
+}
+
+@keyframes typing {
+    0% {
+        width: 0%;
+    }
+    30% {
+        width: 100%;
+    }
+    80% {
+        width: 100%;
+    }
+    90% {
+        width: 0%;
+    }
+    100% {
+        width: 0%;
+    }
 }

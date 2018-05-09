@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms'; // <-- Import FormsModule
 import { HttpModule } from '@angular/http';
 import { MainService } from './main.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -30,6 +31,7 @@ import { EventFormComponent } from './event-form/event-form.component';
     AppRoutingModule,
     FormsModule,
     HttpModule,
+    BrowserAnimationsModule,
   ],
   providers: [MainService],
   bootstrap: [AppComponent]
