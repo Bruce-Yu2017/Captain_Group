@@ -9,6 +9,19 @@ export class MainService {
 
   all_events: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
+
+  getAllEvents(callback) {
+    this._http.get("/allevents").subscribe((res) => {
+      callback(res.json());
+    }, (err) => {
+      console.log("error 0 ");
+    })
+  }
+
+  createStudentEvent(event, callback){
+    this._http.post('/studentevents', {id:this.currentUser._id, event: event}).subscribe(
+      (res)=>{
+
   constructor(private _http: Http) {
     if (localStorage.currentUser !== undefined) {
       console.log(this.currentUser);
@@ -54,6 +67,7 @@ export class MainService {
   createStudentEvent(id, event, callback) {
     this._http.post('/studentevents', { id: id, event: event }).subscribe(
       (res) => {
+
         callback(res.json());
         let allEvents = res.json();
         this.updateAllEvents(allEvents);
@@ -63,9 +77,15 @@ export class MainService {
     )
   };
 
+
+  createCaptainEvent(event, callback){
+    this._http.post('/captainevents', {id:this.currentUser._id, event: event}).subscribe(
+      (res)=>{
+
   createCaptainEvent(id, event, callback) {
     this._http.post('/captainevents', { id: id, event: event }).subscribe(
       (res) => {
+
         callback(res.json());
         let allEvents = res.json();
         this.updateAllEvents(allEvents);
