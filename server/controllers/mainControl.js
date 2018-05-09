@@ -125,10 +125,10 @@ module.exports = {
         }
         else {
           if(login_user === null) {
-            res.json({error: "Your input is invalid. Please try again."})
+            res.json({error: "Your Email is invalid. Please try again."})
           }
           else if(login_user.status !== 1) {
-            res.json({error: "Please activate your account by email."})
+            res.json({error: "Please activate your account by email.", errorCode: 404});
           }
           else {
             UserInfo.findOne({user: login_user._id}, (err, user) => {
@@ -138,10 +138,10 @@ module.exports = {
               else {
                 bcrypt.compare(req.body.password, user.password, (err, resp) => {
                   if(resp === true) {
-                    res.json(login_user)
+                    res.json(login_user);
                   }
                   else {
-                    res.json({error: "Your input is invalid. Please try again."})
+                    res.json({error: "Your Password is invalid. Please try again."})
                   }
                 })
               }
