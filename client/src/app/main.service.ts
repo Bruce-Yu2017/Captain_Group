@@ -9,11 +9,17 @@ export class MainService {
   currentUser = null;
 
   all_events: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  loginstatus: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   constructor(private _http: Http) {
     if (localStorage.currentUser !== undefined) {
-      // console.log(this.currentUser);
       this.currentUser = JSON.parse(localStorage.currentUser);
+      console.log(this.currentUser);
+      let data = [{
+        user: this.currentUser,
+        mesg: null
+      }]
+      this.updateLoginStatus(data);
     }
   }
 
@@ -30,9 +36,8 @@ export class MainService {
       (res) => {
         console.log("from service register: ", res.json());
         callback(res.json());
-        if (res.json().success == 'success') {
-          this.currentUser = res.json().currentUser;
-          localStorage.currentUser = JSON.stringify(res.json().currentUser);
+        if (res.json().success == 'register pending') {
+          console.log('success');          
         }
       },
       (err) => {
@@ -46,9 +51,8 @@ export class MainService {
       (res) => {
         console.log("from service register: ", res.json());
         callback(res.json());
-        if (res.json().success == 'success') {
-          this.currentUser = res.json().currentUser;
-          localStorage.currentUser = JSON.stringify(res.json().currentUser);
+        if (res.json().success == 'register pending') {
+          console.log('success');
         }
       },
       (err) => {
@@ -91,6 +95,10 @@ export class MainService {
 
   updateAllEvents(data) {
     this.all_events.next(data);
+  }
+
+  updateLoginStatus(data) {
+    this.loginstatus.next(data);
   }
 
   getPendingUser(token, callback) {

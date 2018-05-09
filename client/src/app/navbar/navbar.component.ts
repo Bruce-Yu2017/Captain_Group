@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit {
 
   student_reg = {
     name: "",
+    identity: "student",
     email: "",
     phone: "",
     address: "",
@@ -86,7 +87,6 @@ export class NavbarComponent implements OnInit {
   }
 
   studentReg() {
-    console.log('student reg component', this.student_reg);
     this._service.registerStudent(this.student_reg, (res) => {
       if (res.success = 'success') {
         this._router.navigate(['/create'])
@@ -96,6 +96,7 @@ export class NavbarComponent implements OnInit {
       }
       this.student_reg = {
         name: "",
+        identity: "student",
         email: "",
         phone: "",
         address: "",
@@ -127,6 +128,15 @@ export class NavbarComponent implements OnInit {
       $('#reg2').hide();
 
     })
+
+    this._service.loginstatus.subscribe(
+      (data) => {
+        if(data[0].mesg == "reg"){
+
+        }else if(data[0].mesg == "log"){
+
+        }
+      });
   }
 
   display_login() {
