@@ -11,14 +11,15 @@ declare var $ :any;
 })
 export class CalendarComponent implements OnInit {
   date_display;
-  id;
   student = {
+    title: "",
     date: null,
     timeFrom: null,
     timeTo: null,
     message: "",
   }
   captain = {
+    title: "",
     date: null,
     timeFrom: null,
     timeTo: null,
@@ -27,17 +28,24 @@ export class CalendarComponent implements OnInit {
     NumOfCrew: Number,
     message: "",
   }
+  loginUser = "none";
   
   constructor(private atp: AmazingTimePickerService, private _service: MainService) { }
 
   ngOnInit() {
-
     this._service.getAllEvents((res) => {
       this.display_calendar(res);
-    })
-    
+    }) 
+
+    this._service.loginstatus.subscribe(
+      (data) => {
+        if(data[0].user != null){
+          this.loginUser = data[0].user.identity;
+        }
+      });
     
   }
+
   update_event(events) {
     $('#calendar').fullCalendar("removeEvents");
     $('#calendar').fullCalendar('addEventSource', events);
@@ -46,25 +54,33 @@ export class CalendarComponent implements OnInit {
 
   
   student_submit() {
+    this.student.title = this._service.currentUser.name + " seeking Vessel!";
     this._service.createStudentEvent(this.student, (res) => {
-      this.closeModal()
+      console.log('res: ', res);
+      this.closeModal();
+      this.update_event(res);
     });
   }
   captain_submit() {
+    this.captain.title = this._service.currentUser.name + " seeking Crew!";
     this._service.createCaptainEvent(this.captain, (res) => {
-      this.closeModal()
+      console.log('res: ', res);
+      this.closeModal();
+      this.update_event(res);
     });
   }
 
   closeModal() {
     $(".modal").fadeOut();
     this.student = {
+      title: "",
       date: null,
       timeFrom: null,
       timeTo: null,
       message: "",
     }
     this.captain = {
+      title: "",
       date: null,
       timeFrom: null,
       timeTo: null,
@@ -144,7 +160,23 @@ export class CalendarComponent implements OnInit {
 
   }
 
-
+  req_login(state){
+    if(state == 'reg'){
+      let data = [{
+        user: null,
+        mesg: state
+      }]
+      this._service.updateLoginStatus(data);
+    }else if(state == 'log'){
+      let data = [{
+        user: null,
+        mesg: state
+      }]
+      this._service.updateLoginStatus(data);
+    }else{
+      return;
+    }
+  }
 
 
 

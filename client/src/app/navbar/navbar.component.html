@@ -129,16 +129,16 @@
           <div class="form-group">
             <label>Password</label>
             <input type="text" class="form-control" required minlength="4" name="password" [(ngModel)]="captain_reg.password" placeholder="Password..."
-              required minlength="4" #hash="ngModel">
+             #hash="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="hash.invalid && (hash.dirty || hash.touched)">
-            <strong>A Wow! password is required and must be 5 characters long !!!</strong>
+            <strong>A Wow! password is required and must be 4 characters long !!!</strong>
           </div>
 
           <div class="form-group">
             <label>Confirm Password</label>
             <input type="password" [(ngModel)]="pass_con" required minlength="4" #pw_confirm="ngModel" pattern="{{captain_reg.password}}"
-              placeholder="password confirmation" class="form-control" name="password">
+              placeholder="password confirmation" class="form-control" name="pw_confirm">
           </div>
           <div class="alert alert-danger" *ngIf="pw_confirm.invalid && (pw_confirm.dirty || pw_confirm.touched)">
             <strong>A Wow! password is not matched !!!</strong>
@@ -223,11 +223,11 @@
 
           <div class="form-group">
             <label>Password</label>
-            <input type="text" class="form-control" required minlength="4" name="password" [(ngModel)]="student_reg.password" placeholder="Password..."
-              required minlength="4" #hash="ngModel">
+            <input type="text" class="form-control" required minlength="4" name="stupassword" [(ngModel)]="student_reg.password" placeholder="Password..."
+             #stuhash="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="hash.invalid && (hash.dirty || hash.touched)">
-            <strong>A Wow! password is required and must be 5 characters long !!!</strong>
+          <div class="alert alert-danger" *ngIf="stuhash.invalid && (stuhash.dirty || stuhash.touched)">
+            <strong>A Wow! password is required and must be 4 characters long !!!</strong>
           </div>
 
           <div class="form-group">

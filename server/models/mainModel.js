@@ -45,6 +45,6 @@ var CaptainEventSchema = new mongoose.Schema({
   people_joined: [{ type: Schema.Types.ObjectId, ref: "User" }],
   vessel: {type: String, required: true},
   spec: {type: String, required: true},
-  NumOfCrew: {type: Number, required: true}
+  NumOfCrew: {type: String, required: true}
 })
 var CaptainEvent = mongoose.model("CaptainEvent", CaptainEventSchema);

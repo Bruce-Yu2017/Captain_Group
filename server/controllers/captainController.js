@@ -20,6 +20,7 @@ module.exports = {
                 user.created_events.push(newEvent);
                 newEvent.save((err)=>{
                     if(err){
+                        console.log('err: ', err);
                         res.json('Can not save new event!');
                     }else{
                         user.save((err)=>{
