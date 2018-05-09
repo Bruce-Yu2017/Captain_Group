@@ -125,5 +125,9 @@ export class MainService {
       })
   }
 
+  logout() {
+    localStorage.removeItem("currentUser");
+  }
+
 }
   
