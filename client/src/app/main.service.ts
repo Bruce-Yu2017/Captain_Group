@@ -5,16 +5,17 @@ import { BehaviorSubject } from 'Rxjs';
 
 @Injectable()
 export class MainService {
+  
+  currentUser = null;
+
+  all_events: BehaviorSubject<any[]> = new BehaviorSubject([]);
+
   constructor(private _http: Http) {
     if (localStorage.currentUser !== undefined) {
       console.log(this.currentUser);
       this.currentUser = JSON.parse(localStorage.currentUser);
     }
   }
-  currentUser = null;
-
-  all_events: BehaviorSubject<any[]> = new BehaviorSubject([]);
-
 
   getAllEvents(callback) {
     this._http.get("/allevents").subscribe((res) => {
@@ -100,6 +101,21 @@ export class MainService {
     })
   }
 
+
+  login(userdata, callback) {
+    this._http.post("/login", userdata).subscribe(
+      (res) => {
+        callback(res.json());
+        if (res.json().error == undefined) {
+          this.currentUser = res.json();
+          localStorage.currentUser = JSON.stringify(res.json());
+          
+        }
+      },
+      (err) => {
+        console.log("error from login service: ", err);
+      })
+  }
 
 }
   

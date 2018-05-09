@@ -41,6 +41,17 @@ export class NavbarComponent implements OnInit {
 
   pass_con;
 
+  error_message = {
+    email: "",
+    login: "",
+    code: 0
+  }
+
+  user_log = {
+    email: "",
+    password: ""
+  }
+
   constructor(private _service: MainService, private _router: Router) { }
 
   capReg() {
@@ -109,6 +120,25 @@ export class NavbarComponent implements OnInit {
       $('#reg2').hide();
 
     })
+  }
+
+  login() {
+    this._service.login(this.user_log, 
+      (res) => {
+        if(res.error == undefined) {
+          this._router.navigate(['/']);
+        }
+        else {
+          this.error_message.login = res.error;
+          if(res.errorCode != undefined){
+            this.error_message.code = res.errorCode;
+          }
+        }
+      });
+    this.user_log = {
+      email: "",
+      password: ""
+    };
   }
 
 
