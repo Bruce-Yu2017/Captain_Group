@@ -10,7 +10,11 @@ declare var $: any;
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
+
 export class NavbarComponent implements OnInit {
+  logged_user;
+
   captain_reg = {
     name: "",
     identity: "captain",
@@ -41,13 +45,26 @@ export class NavbarComponent implements OnInit {
 
   pass_con;
 
+  error_message = {
+    email: "",
+    login: "",
+    code: 0
+  }
+
+  user_log = {
+    email: "",
+    password: ""
+  }
+
   constructor(private _service: MainService, private _router: Router) { }
 
   capReg() {
     console.log('cap reg component', this.captain_reg);
     this._service.registerCap(this.captain_reg, (res) => {
       if (res.success === 'register pending') {
-        this._router.navigate(['/create']);
+        $(".modal-backdrop.show").hide();
+        $(".modal").hide();
+        this._router.navigate(['/check_email']);
         this.captain_reg = {
           name: "",
           identity: "captain",
@@ -91,6 +108,9 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this._service.currentUser !== null) {
+      this.logged_user = this._service.currentUser.name; 
+    }
     $('#student').hide();
     $('#reg1').hide();
 
@@ -107,6 +127,40 @@ export class NavbarComponent implements OnInit {
       $('#reg2').hide();
 
     })
+  }
+
+  display_login() {
+    $("#loginForm").fadeIn();
+  }
+
+  closeModal() {
+    $("#loginForm").fadeOut();
+  }
+
+  login() {
+    this._service.login(this.user_log, 
+      (res) => {
+        if(res.error == undefined) {
+          this.logged_user = res.name;
+          this.closeModal()
+
+        }
+        else {
+          this.error_message.login = res.error;
+          if(res.errorCode != undefined){
+            this.error_message.code = res.errorCode;
+          }
+        }
+      });
+    this.user_log = {
+      email: "",
+      password: ""
+    };
+  }
+
+  logout() {
+    this._service.logout();
+    this.logged_user = undefined;
   }
 
 
