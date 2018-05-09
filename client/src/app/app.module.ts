@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {MainService} from "./main.service";
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -10,7 +10,9 @@ import { HeaderComponent } from './header/header.component';
 import { DisplayComponent } from './display/display.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { EventFormComponent } from './event-form/event-form.component';
-
+import { AmazingTimePickerModule } from 'amazing-time-picker';
+import { FormsModule } from '@angular/forms'; // <-- Import FormsModule
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -23,10 +25,13 @@ import { EventFormComponent } from './event-form/event-form.component';
     EventFormComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+  BrowserModule,
+    AppRoutingModule,
+    AmazingTimePickerModule,
+    FormsModule,
+    HttpModule,
   ],
-  providers: [],
+  providers: [MainService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

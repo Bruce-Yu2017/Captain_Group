@@ -10,8 +10,16 @@ export class MainService {
 
   constructor(private _http:Http) { }
 
-  createStudentEvent(id, event, callback){
-    this._http.post('/studentevents', {id:id, event: event}).subscribe(
+  getAllEvents(callback) {
+    this._http.get("/allevents").subscribe((res) => {
+      callback(res.json());
+    }, (err) => {
+      console.log("error 0 ");
+    })
+  }
+
+  createStudentEvent(event, callback){
+    this._http.post('/studentevents', {id:this.currentUser._id, event: event}).subscribe(
       (res)=>{
         callback(res.json());
         let allEvents = res.json();
@@ -22,8 +30,8 @@ export class MainService {
     )
   };
 
-  createCaptainEvent(id, event, callback){
-    this._http.post('/captainevents', {id:id, event: event}).subscribe(
+  createCaptainEvent(event, callback){
+    this._http.post('/captainevents', {id:this.currentUser._id, event: event}).subscribe(
       (res)=>{
         callback(res.json());
         let allEvents = res.json();
