@@ -16,7 +16,7 @@ module.exports = function(app){
   });
 
 
-  app.get("/activate/:token", function(req, res) {
+  app.get("/activate_new/:token", function(req, res) {
     mainroutes.activate(req, res);
   })
 
@@ -36,6 +36,10 @@ module.exports = function(app){
   app.get('/allevents', function(req, res){
     events.getAllEvents(req, res);
   });
+
+  app.all("*", function (req, res) {
+    res.sendFile('index.html', { root: './client/dist' });
+  })
 
 };
 

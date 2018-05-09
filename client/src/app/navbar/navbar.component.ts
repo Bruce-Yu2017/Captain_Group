@@ -47,7 +47,9 @@ export class NavbarComponent implements OnInit {
     console.log('cap reg component', this.captain_reg);
     this._service.registerCap(this.captain_reg, (res) => {
       if (res.success === 'register pending') {
-        this._router.navigate(['/create']);
+        $(".modal-backdrop.show").hide();
+        $(".modal").hide();
+        this._router.navigate(['/check_email']);
         this.captain_reg = {
           name: "",
           identity: "captain",

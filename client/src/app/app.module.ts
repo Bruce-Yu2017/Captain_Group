@@ -12,6 +12,8 @@ import { HeaderComponent } from './header/header.component';
 import { DisplayComponent } from './display/display.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
+import { RegPendingComponent } from './reg-pending/reg-pending.component';
+import { CheckEmailComponent } from './check-email/check-email.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { AmazingTimePickerModule } from 'amazing-time-picker';
     HeaderComponent,
     DisplayComponent,
     CalendarComponent,
+    RegPendingComponent,
+    CheckEmailComponent,
   ],
   imports: [
 
