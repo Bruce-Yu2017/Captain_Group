@@ -92,6 +92,14 @@ export class MainService {
     this.all_events.next(data);
   }
 
+  getPendingUser(token, callback) {
+    this._http.get(`/activate_new/${token}`).subscribe((res) => {
+      callback(res.json());
+    }, (err) => {
+      console.log("get pending user err: ", err);
+    })
+  }
+
 
 }
   
