@@ -20,7 +20,7 @@ module.exports = function(app){
     mainroutes.activate(req, res);
   })
 
-}
+
 
   // create student event
   app.post('/studentevents', function(req, res){
