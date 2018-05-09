@@ -13,12 +13,13 @@ declare var $: any;
 export class NavbarComponent implements OnInit {
   captain_reg = {
     name: "",
+    identity: "captain",
     email: "",
     phone: "",
-    address: "",
-    city: "",
-    state: "",
-    zip: "",
+    address: [],
+    experience: "",
+    boat_name: "",
+    spec: "",
     password: ""
   }
 
@@ -45,23 +46,25 @@ export class NavbarComponent implements OnInit {
   capReg() {
     console.log('cap reg component', this.captain_reg);
     this._service.registerCap(this.captain_reg, (res) => {
-      if (res.success = 'success') {
-        this._router.navigate(['/create'])
+      if (res.success === 'register pending') {
+        this._router.navigate(['/create']);
+        this.captain_reg = {
+          name: "",
+          identity: "captain",
+          email: "",
+          phone: "",
+          address: [],
+          experience: "",
+          boat_name: "",
+          spec: "",
+          password: ""
+        }
+        this.pass_con = "";
       }
       else {
-        this.err_message.email = 'This email has been registered';
+        this.err_message.email = res.error;
       }
-      this.captain_reg = {
-        name: "",
-        email: "",
-        phone: "",
-        address: "",
-        city: "",
-        state: "",
-        zip: "",
-        password: ""
-      }
-      this.pass_con = "";
+      
     })
   }
 
