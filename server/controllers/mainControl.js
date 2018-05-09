@@ -113,7 +113,10 @@ module.exports = {
         }
         else {
           user.status = 1;
-          res.json({info: "activate success", user: user});
+          user.save((err) => {
+            res.json({user: user});
+          })
+          
         }
       })
     },
