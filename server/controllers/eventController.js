@@ -13,20 +13,20 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     getAllEvents: (req, res) =>{
         let allEvents = [];
-        StudentEvent.find({}, (err, events)=>{
+        StudentEvent.find({}, (err, studentevents)=>{
             if(err){
                 res.json({err:err});
             }else{
-                allEvents.concat(events);
+                allEvents = allEvents.concat(studentevents);
+                CaptainEvent.find({}, (err, captainevents)=>{
+                    if(err){
+                        res.json({err:err});
+                    }else{
+                        allEvents = allEvents.concat(captainevents);
+                        res.json(allEvents);
+                    }
+                });
             }
-        });
-        CaptainEvent.find({}, (err, events)=>{
-            if(err){
-                res.json({err:err});
-            }else{
-                allEvents.concat(events);
-            }
-        });
-        res.json(allEvents);        
+        });        
     },
 };
