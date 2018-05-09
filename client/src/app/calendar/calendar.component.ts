@@ -42,7 +42,6 @@ export class CalendarComponent implements OnInit {
     $('#calendar').fullCalendar("removeEvents");
     $('#calendar').fullCalendar('addEventSource', events);
     $('#calendar').fullCalendar('rerenderEvents');
-    
   }
 
   
@@ -81,6 +80,7 @@ export class CalendarComponent implements OnInit {
     amazingTimePicker.afterClose().subscribe(time => {
       console.log(time);
       this.student.timeFrom = time;
+      this.captain.timeFrom = time;
     });
   }
   timeTo() {
@@ -88,6 +88,7 @@ export class CalendarComponent implements OnInit {
     amazingTimePicker.afterClose().subscribe(time => {
       console.log(time);
       this.student.timeTo = time;
+      this.captain.timeTo = time;
     });
   }
 

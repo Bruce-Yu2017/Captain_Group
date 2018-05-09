@@ -24,10 +24,6 @@ export class MainService {
     })
   }
 
-  
-
-  
-
   registerCap(data, callback) {
     this._http.post('/register', data).subscribe(
       (res) => {
