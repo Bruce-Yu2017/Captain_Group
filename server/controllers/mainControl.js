@@ -19,31 +19,39 @@ module.exports = {
         }
         else {
           if(user === null) {
-            let hashed_password = bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-              if(err) {
-                console.log('hash err: ', err);
-              }
-              else {
-                return hash;
-              }
-            });
-            let new_user = new User({
-              name: req.body.name,
-              identity: req.body.identity,
-              email: req.body.email,
-              phone: req.body.phone,
-              address: req.body.address,
-              experience: req.body.experience,
-              boat_name: req.body.boat_name,
-              spec: req.body.spec,
-            });
+            console.log(req.body.password);
+            var salt = bcrypt.genSaltSync(saltRounds);
+            var hashed_password = bcrypt.hashSync(req.body.password, salt);
+            console.log("hash", hashed_password);
+            if(req.body.identity === "captain") {
+              var new_user = new User({
+                name: req.body.name,
+                identity: req.body.identity,
+                email: req.body.email,
+                phone: req.body.phone,
+                address: req.body.address,
+                experience: req.body.experience,
+                boat_name: req.body.boat_name,
+                spec: req.body.spec,
+              });
+            }
+            else {
+              var new_user = new User({
+                name: req.body.name,
+                identity: req.body.identity,
+                email: req.body.email,
+                phone: req.body.phone,
+                address: req.body.address
+              });
+            }
+            
             new_user.token = jwt.sign({ email: new_user.email }, secret, { expiresIn: '1h' });
             new_user.save((err) => {
               if(err) {
                 console.log("new user save err: ", err);
               }
               else {
-                let userinfo = new UserInfo({
+                var userinfo = new UserInfo({
                   password: hashed_password,
                   user: new_user._id
                 });
@@ -67,7 +75,7 @@ module.exports = {
                       <h1>Hello, ${new_user.name}.</h1> 
                       <p>You have a new account created by the admin of Greatpondyachtclub team. Please click on this link below to activate your account: </p>
                       <a href="http://localhost:8000/activate/${new_user.token}">Activate</a>
-                      <p>This link will expire in 24 hours.</p>
+                      <p>This link will expire in 1 hours.</p>
                       <h3>Greatpondyachtclub team</h3>
                       `
                     var mailOptions = {
@@ -84,7 +92,7 @@ module.exports = {
                         console.log('Email sent: ' + info.response);
                       }
                     });
-                    res.json("register pending");
+                    res.json({success: "register pending"});
                   }
                 })
                 
@@ -105,7 +113,10 @@ module.exports = {
         }
         else {
           user.status = 1;
-          res.json({info: "activate success", user: user});
+          user.save((err) => {
+            res.json({user: user});
+          })
+          
         }
       })
     },
@@ -117,10 +128,10 @@ module.exports = {
         }
         else {
           if(login_user === null) {
-            res.json({error: "Your input is invalid. Please try again."})
+            res.json({error: "Your Email is invalid. Please try again."})
           }
           else if(login_user.status !== 1) {
-            res.json({error: "Please activate your account by email."})
+            res.json({error: "Please activate your account by email.", errorCode: 404});
           }
           else {
             UserInfo.findOne({user: login_user._id}, (err, user) => {
@@ -130,10 +141,10 @@ module.exports = {
               else {
                 bcrypt.compare(req.body.password, user.password, (err, resp) => {
                   if(resp === true) {
-                    res.json(login_user)
+                    res.json(login_user);
                   }
                   else {
-                    res.json({error: "Your input is invalid. Please try again."})
+                    res.json({error: "Your Password is invalid. Please try again."})
                   }
                 })
               }

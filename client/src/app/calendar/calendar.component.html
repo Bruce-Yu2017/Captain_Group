@@ -1,13 +1,78 @@
 <h1 class="sectionName">GPYC Events Calendar</h1>
 <div id="calendar"></div>
-
-<!-- Small modal -->
-<div id="calendarModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <button>Request a Captain</button>
-      <button>Join a Boot</button>
-    </div>
+<div id="myModal0" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <h1 id="title"></h1>
+    <p id="content"></p>
   </div>
 </div>
-<!-- Small modal -->
+
+
+<div id="myModal1" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <button *ngIf="loginUser == 'student'" class="btn btn-primary butt1" (click) = "student_req()">Student request</button>
+    <button *ngIf="loginUser == 'captain'" class="btn btn-primary butt2" (click) = "captain_req()">Captain request</button>
+    <button *ngIf="loginUser == 'none'" class="btn btn-primary butt3" (click) = "req_login('log')">Login</button>
+    <button *ngIf="loginUser == 'none'" class="btn btn-primary butt4" (click) = "req_login('reg')">Register</button>
+  </div>
+</div>
+
+<div id="myModal2" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <form (submit) = "student_submit()">
+      <h1>Crew Seeking Vessel</h1>
+      <label for="">Date</label>
+      <input type="text" name="date" disabled [(ngModel)] ="date_display">
+      <label>Time From: </label>
+      <input (click) ="timeFrom()" value ={{student.timeFrom}}>
+      <label>Time To: </label>
+      <input (click) ="timeTo()" value ={{student.timeTo}}>
+      <label for="">Message to Would-be Captains:</label>
+      <textarea name="message" cols="30" rows="10" [(ngModel)] ="student.message"></textarea>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click) ="closeModal()">Close</button>
+        <button class="btn btn-info">Submit</button>
+      </div>
+      <br/>
+    </form>
+  </div>
+</div>
+
+<div id="myModal3" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <form (submit)="captain_submit()">
+      <h1>Captain Seeking Crew</h1>
+
+      <label for="">Date</label>
+      <input type="text" name="date" disabled [(ngModel)]="date_display">
+
+      <label>Time From: </label>
+      <input (click)="timeFrom()" value= {{captain.timeFrom}}>
+
+      <label>Time To: </label>
+      <input (click)="timeTo()" value= {{captain.timeTo}}>
+
+      <label for="">Vessel:</label>
+      <input type="text" name="vessel" [(ngModel)] ="captain.vessel">
+
+      <label for="">Specs:</label>
+      <input type="text" name="specs" [(ngModel)] ="captain.spec">
+
+      <label for="">Captains Log (Message):</label>
+      <textarea name="message" cols="30" rows="10" [(ngModel)]="captain.message"></textarea>
+
+      <label for="">Number of Crew You Seek:</label>
+      <input type="number" name="num_of_crew" [(ngModel)] ="captain.NumOfCrew">
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click) ="closeModal()">Close</button>
+        <button class="btn btn-info">Submit</button>
+      </div>
+      <br/>
+    </form>
+  </div>
+</div>
+

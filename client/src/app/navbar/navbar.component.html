@@ -1,3 +1,4 @@
+
 <header>
   <nav>
     <ul id="check_box">
@@ -23,13 +24,36 @@
   </nav>
 </header>
 
-Modal
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" src="/assets/images/brand.png">
+      </a>
+      <button type="button" class="btn btn-primary navbar-btn">
+       <i class="ion-calendar"></i> Event Calender</button>
+    </div>
+
+    <div class="navbar-form navbar-right">
+      <span *ngIf = "logged_user !== undefined ">Hi, {{logged_user}}</span>
+      <button *ngIf = "logged_user == undefined" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#regModal">
+       <i class="ion-android-boat"></i> Captain/Student Registration</button>
+      <button *ngIf = "logged_user == undefined" type="button" class="btn btn-success" (click) ="display_login()">
+       <i class="ion-person"></i> Login</button>
+      <button *ngIf = "logged_user !== undefined " type="button" class="btn btn-danger" (click) = "logout()">
+      <i class="ion-person"></i> Logout</button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Modal -->
 <div class="modal fade" id="regModal" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div style="text-align: center">
         <span id="reg1">
-          <button>Caption</button>
+          <button>Captain</button>
         </span>
         <span id="reg2">
           <button>Student</button>
@@ -38,7 +62,7 @@ Modal
       <br/>
       <div class="modal-body">
         <form id="cap" (submit)="capReg()">
-          <h4>Caption</h4>
+          <h4>Captain</h4>
           <div class="form-group">
             <label for="">Your Name</label>
             <input type="text" class="form-control" name="name" [(ngModel)]="captain_reg.name" placeholder="Your name..." #capName="ngModel"
@@ -57,6 +81,9 @@ Modal
           <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
             <strong>A Wow! email is required and checking the format !!!</strong>
           </div>
+          <div class="alert alert-danger" *ngIf="err_message.email.length > 0">
+            <strong>{{err_message.email}}</strong>
+          </div>
 
 
           <div class="form-group">
@@ -70,7 +97,7 @@ Modal
 
           <div class="form-group">
             <label for="">Address</label>
-            <input type="text" class="form-control" name="address" [(ngModel)]="captain_reg.address" placeholder="Your address..." required
+            <input type="text" class="form-control" name="address" [(ngModel)]="captain_reg.address[0]" placeholder="Your address..." required
               #address="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="address.invalid && (address.dirty || address.touched)">
@@ -79,7 +106,7 @@ Modal
 
           <div class="form-group">
             <label for="">City</label>
-            <input type="text" class="form-control" name="city" [(ngModel)]="captain_reg.city" placeholder="City..." required #city="ngModel">
+            <input type="text" class="form-control" name="city" [(ngModel)]="captain_reg.address[1]" placeholder="City..." required #city="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="city.invalid && (city.dirty || city.touched)">
             <strong>City is required and checking the format !!!</strong>
@@ -87,7 +114,7 @@ Modal
 
           <div class="form-group">
             <label for="">State</label>
-            <input type="text" class="form-control" name="state" [(ngModel)]="captain_reg.state" placeholder="State..." required #state="ngModel">
+            <input type="text" class="form-control" name="state" [(ngModel)]="captain_reg.address[2]" placeholder="State..." required #state="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="state.invalid && (state.dirty || state.touched)">
             <strong>State is required and checking the format !!!</strong>
@@ -95,25 +122,51 @@ Modal
 
           <div class="form-group">
             <label for="">Zip</label>
-            <input type="text" class="form-control" name="zip" [(ngModel)]="captain_reg.zip" placeholder="Zip..." required #zip="ngModel">
+            <input type="text" class="form-control" name="zip" [(ngModel)]="captain_reg.address[3]" placeholder="Zip..." required #zip="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="zip.invalid && (zip.dirty || zip.touched)">
             <strong>Zip is required and checking the format !!!</strong>
           </div>
 
           <div class="form-group">
+            <label for="">Experience</label>
+            <input type="number" class="form-control" name="experience" [(ngModel)]="captain_reg.experience" placeholder="Experience..."
+              required #exp="ngModel">
+          </div>
+          <div class="alert alert-danger" *ngIf="exp.invalid && (exp.dirty || exp.touched)">
+            <strong>Experience is required and checking the format !!!</strong>
+          </div>
+          
+          <div class="form-group">
+            <label for="">Boat Name</label>
+            <input type="text" class="form-control" name="boat" [(ngModel)]="captain_reg.boat_name" placeholder="Boat Name..." required
+              #boat="ngModel">
+          </div>
+          <div class="alert alert-danger" *ngIf="boat.invalid && (boat.dirty || boat.touched)">
+            <strong>Boat name is required and checking the format !!!</strong>
+          </div>
+          
+          <div class="form-group">
+            <label for="">Spec</label>
+            <input type="text" class="form-control" name="spec" [(ngModel)]="captain_reg.spec" placeholder="Boat Name..." required #spec="ngModel">
+          </div>
+          <div class="alert alert-danger" *ngIf="spec.invalid && (spec.dirty || spec.touched)">
+            <strong>Spec name is required and checking the format !!!</strong>
+          </div>
+
+          <div class="form-group">
             <label>Password</label>
             <input type="text" class="form-control" required minlength="4" name="password" [(ngModel)]="captain_reg.password" placeholder="Password..."
-              required minlength="4" #hash="ngModel">
+             #hash="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="hash.invalid && (hash.dirty || hash.touched)">
-            <strong>A Wow! password is required and must be 5 characters long !!!</strong>
+            <strong>A Wow! password is required and must be 4 characters long !!!</strong>
           </div>
 
           <div class="form-group">
             <label>Confirm Password</label>
             <input type="password" [(ngModel)]="pass_con" required minlength="4" #pw_confirm="ngModel" pattern="{{captain_reg.password}}"
-              placeholder="password confirmation" class="form-control" name="password">
+              placeholder="password confirmation" class="form-control" name="pw_confirm">
           </div>
           <div class="alert alert-danger" *ngIf="pw_confirm.invalid && (pw_confirm.dirty || pw_confirm.touched)">
             <strong>A Wow! password is not matched !!!</strong>
@@ -126,6 +179,10 @@ Modal
           <br/>
         </form>
 
+
+
+
+        <!-- student -->
         <form id="student" (submit)="studentReg()">
           <h4>Student</h4>
           <div class="form-group">
@@ -190,13 +247,15 @@ Modal
             <strong>Zip is required and checking the format !!!</strong>
           </div>
 
+          
+
           <div class="form-group">
             <label>Password</label>
-            <input type="text" class="form-control" required minlength="4" name="password" [(ngModel)]="student_reg.password" placeholder="Password..."
-              required minlength="4" #hash="ngModel">
+            <input type="text" class="form-control" required minlength="4" name="stupassword" [(ngModel)]="student_reg.password" placeholder="Password..."
+             #stuhash="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="hash.invalid && (hash.dirty || hash.touched)">
-            <strong>A Wow! password is required and must be 5 characters long !!!</strong>
+          <div class="alert alert-danger" *ngIf="stuhash.invalid && (stuhash.dirty || stuhash.touched)">
+            <strong>A Wow! password is required and must be 4 characters long !!!</strong>
           </div>
 
           <div class="form-group">
@@ -219,30 +278,52 @@ Modal
 </div>
 
 <!-- Login Form -->
-<div class="modal fade" id="loginModal" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div style="text-align: center">
-        <span></span>
+
+<div id="loginForm" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <form (submit)="login()" #formLogin="ngForm" id="login-form" role="form">
+    
+      <div class="form-group">
+        <label for="">Your Email: </label>
+        <input type="text" class="form-control" id="login-username" placeholder="Enter Email..." name="email" [(ngModel)]="user_log.email"
+          #log_email="ngModel" required>
+        <div *ngIf="log_email.invalid && (log_email.dirty || log_email.touched)">
+          <div class="alert alert-dismissible alert-danger aler_log" role="alert">
+            <div *ngIf="log_email.errors.required">
+              <span> Email is required.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <label>Password</label>
+        <input id="login-password" type="password" class="form-control" placeholder="Enter Password..." name="password" [(ngModel)]="user_log.password"
+          #log_password="ngModel" required>
+        <div *ngIf="log_password.invalid && (log_password.dirty || log_password.touched)">
+          <div class="alert alert-dismissible alert-danger aler_log" role="alert">
+            <div *ngIf="log_password.errors.required">
+              <span> Password is required.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" *ngIf="error_message.code == 404">Send Activation Email</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click) ="closeModal()">Close</button>
+        <button id="btn-login" [disabled]="formLogin.invalid" data-toggle="modal" class="btn btn-success">Submit</button>
+      </div>
+      <div class="alert alert-dismissible alert-danger aler_log" role="alert" *ngIf="error_message.login != ''">
+        {{error_message.login}}
       </div>
       <br/>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="">Your Name</label>
-            <input type="text" class="form-control" name="">
-          </div>
-          <div class="form-group">
-            <label>Password</label>
-            <input type="text" class="form-control" name="">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-info">Submit</button>
-          </div>
-          <br/>
-        </form>
-      </div>
-    </div>
+    </form>
   </div>
 </div>
+
+<app-header></app-header>
+<app-display></app-display>
+
+<app-calendar></app-calendar>
+<app-footer></app-footer>
