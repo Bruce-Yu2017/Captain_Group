@@ -3,6 +3,7 @@ import { AmazingTimePickerService } from 'amazing-time-picker';
 import { MainService } from '../main.service';
 declare var jquery:any;
 declare var $ :any;
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -30,6 +31,7 @@ export class CalendarComponent implements OnInit {
   constructor(private atp: AmazingTimePickerService, private _service: MainService) { }
 
   ngOnInit() {
+
     this._service.getAllEvents((res) => {
       this.display_calendar(res);
     })

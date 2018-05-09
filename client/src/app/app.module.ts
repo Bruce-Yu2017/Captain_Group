@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {MainService} from "./main.service";
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms'; // <-- Import FormsModule
+import { HttpModule } from '@angular/http';
+import { MainService } from './main.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -25,9 +28,14 @@ import { HttpModule } from '@angular/http';
     EventFormComponent
   ],
   imports: [
+
   BrowserModule,
     AppRoutingModule,
     AmazingTimePickerModule,
+
+    BrowserModule,
+    AppRoutingModule,
+
     FormsModule,
     HttpModule,
   ],
