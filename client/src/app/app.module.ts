@@ -11,7 +11,6 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { DisplayComponent } from './display/display.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { EventFormComponent } from './event-form/event-form.component';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { AmazingTimePickerModule } from 'amazing-time-picker';
     HeaderComponent,
     DisplayComponent,
     CalendarComponent,
-    EventFormComponent
   ],
   imports: [
 
