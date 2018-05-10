@@ -1,16 +1,10 @@
-
-
 <div (click)="close()">
   <header>
-
     <span class="navbar-brand">
       <img alt="Brand" src="/assets/images/brand.png">
     </span>
-
     <nav>
-
       <span id="menu-icon" (click)="click()"></span>
-
       <ul id="check_box">
         <li>
           <span *ngIf="logged_user !== undefined ">Hi, {{logged_user}}</span>
@@ -147,7 +141,7 @@
           <div class="form-group">
             <label>Password</label>
             <input type="text" class="form-control" required minlength="4" name="password" [(ngModel)]="captain_reg.password" placeholder="Password..."
-             #hash="ngModel">
+              #hash="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="hash.invalid && (hash.dirty || hash.touched)">
             <strong>A Wow! password is required and must be 4 characters long !!!</strong>
@@ -163,14 +157,11 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger"  (click) = "closeReg()">Close</button>
+            <button type="button" class="btn btn-danger" (click)="closeReg()">Close</button>
             <button type="submit" class="btn btn-info">Submit</button>
           </div>
           <br/>
         </form>
-
-
-
 
         <!-- student -->
         <form id="student" (submit)="studentReg()">
@@ -242,7 +233,7 @@
           <div class="form-group">
             <label>Password</label>
             <input type="text" class="form-control" required minlength="4" name="stupassword" [(ngModel)]="student_reg.password" placeholder="Password..."
-             #stuhash="ngModel">
+              #stuhash="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="stuhash.invalid && (stuhash.dirty || stuhash.touched)">
             <strong>A Wow! password is required and must be 4 characters long !!!</strong>
@@ -257,7 +248,7 @@
             <strong>A Wow! password is not matched !!!</strong>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" (click) = "closeReg()">Close</button>
+            <button type="button" class="btn btn-danger" (click)="closeReg()">Close</button>
             <button type="submit" class="btn btn-info">Submit</button>
           </div>
           <br/>

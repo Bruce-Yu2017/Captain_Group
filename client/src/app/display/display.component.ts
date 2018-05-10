@@ -10,6 +10,8 @@ export class DisplayComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // $('.showcase').hover
+
   }
 
 }
