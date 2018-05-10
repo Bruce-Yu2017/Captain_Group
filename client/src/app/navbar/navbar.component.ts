@@ -145,6 +145,14 @@ export class NavbarComponent implements OnInit {
           this.display_login();
         }
       });
+    
+    this._service.scrollDownFromHeader.subscribe((res) => {
+      console.log(res);
+      if(res.length > 0) {
+        this.scrollTo();
+      }
+      
+    })
   }
 
   scrollTo() {
