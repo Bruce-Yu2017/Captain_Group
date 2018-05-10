@@ -32,10 +32,7 @@ export class NavbarComponent implements OnInit {
     identity: "student",
     email: "",
     phone: "",
-    address: "",
-    city: "",
-    state: "",
-    zip: "",
+    address: [],
     password: ""
   }
 
@@ -89,7 +86,7 @@ export class NavbarComponent implements OnInit {
   studentReg() {
     this._service.registerStudent(this.student_reg, (res) => {
       if (res.success = 'success') {
-        this._router.navigate(['/create'])
+        this._router.navigate(['/check_email'])
       }
       else {
         this.err_message.email = 'This email has been registered';
@@ -99,16 +96,27 @@ export class NavbarComponent implements OnInit {
         identity: "student",
         email: "",
         phone: "",
-        address: "",
-        city: "",
-        state: "",
-        zip: "",
+        address: [],
         password: ""
       }
     })
   }
 
   ngOnInit() {
+    var modal0 = document.getElementById('myModal0');
+    var modal1 = document.getElementById('myModal1');
+    var modal2 = document.getElementById('myModal2');
+    var regform = document.getElementById("regForm");
+    var loginForm = document.getElementById("loginForm");
+    window.onclick = function (event) {
+      if (event.target == modal1 || event.target == modal2 || event.target == modal0 || event.target == regform || event.target == loginForm) {
+        $("#myModal0").fadeOut();
+        $("#myModal1").fadeOut();
+        $("#myModal2").fadeOut();
+        regform.style.display = "none";
+        $("#loginForm").hide();
+      }
+    }
     if (this._service.currentUser !== null) {
       this.logged_user = this._service.currentUser.name; 
     }
@@ -137,6 +145,12 @@ export class NavbarComponent implements OnInit {
           this.display_login();
         }
       });
+  }
+
+  scrollTo() {
+    $('html, body').animate({
+      scrollTop: $(".calendar").offset().top
+    }, 1000);
   }
 
   display_login() {
@@ -203,6 +217,7 @@ export class NavbarComponent implements OnInit {
 
         }
       }
+      
     })
     this._service.show = true;
   }
