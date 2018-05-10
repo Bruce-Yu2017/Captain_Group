@@ -10,6 +10,7 @@ export class MainService {
 
   all_events: BehaviorSubject<any[]> = new BehaviorSubject([]);
   loginstatus: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  scrollDownFromHeader: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   constructor(private _http: Http) {
     if (localStorage.currentUser !== undefined) {
