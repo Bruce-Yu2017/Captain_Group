@@ -1,68 +1,58 @@
 
-<header>
-  <nav>
-    <ul id="check_box">
-      <li>
-        <a class="navbar-brand" href="#">
-          <img alt="Brand" src="/assets/images/brand.png">
-        </a>
-      </li>
-      <li>
-        <button type="button" class="btn btn-primary navbar-btn">
-          <i class="ion-calendar"></i> Event Calender
-        </button>
-      </li>
-      <li>
-        <button class="moveBtn" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#regModal">
-          <i class="ion-person-add"></i> Captain/Student Registration</button>
-      </li>
-      <li>
-        <button class="moveBtn" type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
-          <i class="ion-person-stalker"></i> Login</button>
-      </li>
-    </ul>
-  </nav>
-</header>
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-        <img alt="Brand" src="/assets/images/brand.png">
-      </a>
-      <button type="button" class="btn btn-primary navbar-btn">
-       <i class="ion-calendar"></i> Event Calender</button>
-    </div>
-
-    <div class="navbar-form navbar-right">
-      <span *ngIf = "logged_user !== undefined ">Hi, {{logged_user}}</span>
-      <button *ngIf = "logged_user == undefined" type="submit" class="btn btn-primary" data-toggle="modal" data-target="#regModal">
-       <i class="ion-android-boat"></i> Captain/Student Registration</button>
-      <button *ngIf = "logged_user == undefined" type="button" class="btn btn-success" (click) ="display_login()">
-       <i class="ion-person"></i> Login</button>
-      <button *ngIf = "logged_user !== undefined " type="button" class="btn btn-danger" (click) = "logout()">
-      <i class="ion-person"></i> Logout</button>
-    </div>
-  </div>
-</nav>
 
 
-<!-- Modal -->
-<div class="modal fade" id="regModal" role="dialog">
-  <div class="modal-dialog">
+<div (click)="close()">
+  <header>
+
+    <span class="navbar-brand">
+      <img alt="Brand" src="/assets/images/brand.png">
+    </span>
+
+    <nav>
+
+      <span id="menu-icon" (click)="click()"></span>
+
+      <ul id="check_box">
+        <li>
+          <span *ngIf="logged_user !== undefined ">Hi, {{logged_user}}</span>
+        </li>
+        <li>
+          <button *ngIf="logged_user == undefined" type="submit" class="btn btn-primary" (click)="display_reg()">
+            <i class="ion-android-boat"></i> Captain/Student Registration</button>
+        </li>
+        <li>
+          <button *ngIf="logged_user == undefined" type="button" class="btn btn-success" (click)="display_login()">
+            <i class="ion-person"></i> Login</button>
+        </li>
+
+        <li>
+          <button *ngIf="logged_user !== undefined " type="button" class="btn btn-danger" (click)="logout()">
+            <i class="ion-person"></i> Logout</button>
+        </li>
+
+      </ul>
+
+    </nav>
+
+  </header>
+
+
+
+  <div id="regForm" class="modal">
+    <!-- Modal content -->
     <div class="modal-content">
       <div style="text-align: center">
         <span id="reg1">
-          <button>Captain</button>
+          <button>Request as Caption</button>
         </span>
         <span id="reg2">
-          <button>Student</button>
+          <button>Request as Student</button>
         </span>
       </div>
       <br/>
       <div class="modal-body">
         <form id="cap" (submit)="capReg()">
-          <h4>Captain</h4>
+          <h4>Request as Caption</h4>
           <div class="form-group">
             <label for="">Your Name</label>
             <input type="text" class="form-control" name="name" [(ngModel)]="captain_reg.name" placeholder="Your name..." #capName="ngModel"
@@ -97,8 +87,8 @@
 
           <div class="form-group">
             <label for="">Address</label>
-            <input type="text" class="form-control" name="address" [(ngModel)]="captain_reg.address[0]" placeholder="Your address..." required
-              #address="ngModel">
+            <input type="text" class="form-control" name="address" [(ngModel)]="captain_reg.address[0]" placeholder="Your address..."
+              required #address="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="address.invalid && (address.dirty || address.touched)">
             <strong>Address is required and checking the format !!!</strong>
@@ -114,7 +104,8 @@
 
           <div class="form-group">
             <label for="">State</label>
-            <input type="text" class="form-control" name="state" [(ngModel)]="captain_reg.address[2]" placeholder="State..." required #state="ngModel">
+            <input type="text" class="form-control" name="state" [(ngModel)]="captain_reg.address[2]" placeholder="State..." required
+              #state="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="state.invalid && (state.dirty || state.touched)">
             <strong>State is required and checking the format !!!</strong>
@@ -136,7 +127,7 @@
           <div class="alert alert-danger" *ngIf="exp.invalid && (exp.dirty || exp.touched)">
             <strong>Experience is required and checking the format !!!</strong>
           </div>
-          
+
           <div class="form-group">
             <label for="">Boat Name</label>
             <input type="text" class="form-control" name="boat" [(ngModel)]="captain_reg.boat_name" placeholder="Boat Name..." required
@@ -145,7 +136,7 @@
           <div class="alert alert-danger" *ngIf="boat.invalid && (boat.dirty || boat.touched)">
             <strong>Boat name is required and checking the format !!!</strong>
           </div>
-          
+
           <div class="form-group">
             <label for="">Spec</label>
             <input type="text" class="form-control" name="spec" [(ngModel)]="captain_reg.spec" placeholder="Boat Name..." required #spec="ngModel">
@@ -173,7 +164,7 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger"  (click) = "closeReg()">Close</button>
             <button type="submit" class="btn btn-info">Submit</button>
           </div>
           <br/>
@@ -184,7 +175,7 @@
 
         <!-- student -->
         <form id="student" (submit)="studentReg()">
-          <h4>Student</h4>
+          <h4>Request as Student</h4>
           <div class="form-group">
             <label for="">Your Name</label>
             <input type="text" class="form-control" name="name" [(ngModel)]="student_reg.name" placeholder="Your name..." #studentName="ngModel"
@@ -247,7 +238,7 @@
             <strong>Zip is required and checking the format !!!</strong>
           </div>
 
-          
+
 
           <div class="form-group">
             <label>Password</label>
@@ -267,63 +258,64 @@
             <strong>A Wow! password is not matched !!!</strong>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" (click) = "closeReg()">Close</button>
             <button type="submit" class="btn btn-info">Submit</button>
           </div>
           <br/>
         </form>
       </div>
+
     </div>
   </div>
-</div>
 
-<!-- Login Form -->
+  <!-- Login Form -->
 
-<div id="loginForm" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <form (submit)="login()" #formLogin="ngForm" id="login-form" role="form">
-    
-      <div class="form-group">
-        <label for="">Your Email: </label>
-        <input type="text" class="form-control" id="login-username" placeholder="Enter Email..." name="email" [(ngModel)]="user_log.email"
-          #log_email="ngModel" required>
-        <div *ngIf="log_email.invalid && (log_email.dirty || log_email.touched)">
-          <div class="alert alert-dismissible alert-danger aler_log" role="alert">
-            <div *ngIf="log_email.errors.required">
-              <span> Email is required.</span>
+  <div id="loginForm" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <form (submit)="login()" #formLogin="ngForm" id="login-form" role="form">
+
+        <div class="form-group">
+          <label for="">Your Email: </label>
+          <input type="text" class="form-control" id="login-username" placeholder="Enter Email..." name="email" [(ngModel)]="user_log.email"
+            #log_email="ngModel" required>
+          <div *ngIf="log_email.invalid && (log_email.dirty || log_email.touched)">
+            <div class="alert alert-dismissible alert-danger aler_log" role="alert">
+              <div *ngIf="log_email.errors.required">
+                <span> Email is required.</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    
-      <div class="form-group">
-        <label>Password</label>
-        <input id="login-password" type="password" class="form-control" placeholder="Enter Password..." name="password" [(ngModel)]="user_log.password"
-          #log_password="ngModel" required>
-        <div *ngIf="log_password.invalid && (log_password.dirty || log_password.touched)">
-          <div class="alert alert-dismissible alert-danger aler_log" role="alert">
-            <div *ngIf="log_password.errors.required">
-              <span> Password is required.</span>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input id="login-password" type="password" class="form-control" placeholder="Enter Password..." name="password" [(ngModel)]="user_log.password"
+            #log_password="ngModel" required>
+          <div *ngIf="log_password.invalid && (log_password.dirty || log_password.touched)">
+            <div class="alert alert-dismissible alert-danger aler_log" role="alert">
+              <div *ngIf="log_password.errors.required">
+                <span> Password is required.</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-info" *ngIf="error_message.code == 404">Send Activation Email</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" (click) ="closeModal()">Close</button>
-        <button id="btn-login" [disabled]="formLogin.invalid" data-toggle="modal" class="btn btn-success">Submit</button>
-      </div>
-      <div class="alert alert-dismissible alert-danger aler_log" role="alert" *ngIf="error_message.login != ''">
-        {{error_message.login}}
-      </div>
-      <br/>
-    </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" *ngIf="error_message.code == 404">Send Activation Email</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeLogin()">Close</button>
+          <button id="btn-login" [disabled]="formLogin.invalid" data-toggle="modal" class="btn btn-success">Submit</button>
+        </div>
+        <div class="alert alert-dismissible alert-danger aler_log" role="alert" *ngIf="error_message.login != ''">
+          {{error_message.login}}
+        </div>
+        <br/>
+      </form>
+    </div>
   </div>
+
+  <app-header></app-header>
+  <app-display></app-display>
+
+  <app-calendar></app-calendar>
+  <app-footer></app-footer>
 </div>
-
-<app-header></app-header>
-<app-display></app-display>
-
-<app-calendar></app-calendar>
-<app-footer></app-footer>
