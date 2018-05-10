@@ -4,8 +4,9 @@
       <img alt="Brand" src="/assets/images/brand.png">
       <span>GPYC SAILING PROGRAM</span>
     </span>
+    <span class="user_name" *ngIf="logged_user !== undefined ">Hi, {{logged_user}}</span>
 
-    <span *ngIf="logged_user !== undefined ">Hi, {{logged_user}}</span>
+    
     <nav>
       <span id="menu-icon" (click)="click()"></span>
       <ul id="check_box">

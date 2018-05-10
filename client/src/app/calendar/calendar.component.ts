@@ -169,6 +169,17 @@ export class CalendarComponent implements OnInit {
         }
         
       },
+      eventAfterRender: (event, element, view) => {
+        console.log(event)
+        if(event.vessel !== undefined) {
+          element.css('background-color', 'rgba(179, 225, 247, 1)');
+          element.css('border', 'none');
+        }
+        else {
+          element.css('background-color', '#CDDC39');
+          element.css('border', 'none');          
+        }
+      }
       
     });
     
