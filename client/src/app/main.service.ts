@@ -20,6 +20,12 @@ export class MainService {
         mesg: null
       }]
       this.updateLoginStatus(data);
+    }else{
+      let data = [{
+        user: null,
+        mesg: null
+      }]
+      this.updateLoginStatus(data);
     }
   }
 
@@ -117,6 +123,11 @@ export class MainService {
         if (res.json().error == undefined) {
           this.currentUser = res.json();
           localStorage.currentUser = JSON.stringify(res.json());
+          let data = [{
+            user: this.currentUser,
+            mesg: null
+          }]
+          this.updateLoginStatus(data);
           
         }
       },
