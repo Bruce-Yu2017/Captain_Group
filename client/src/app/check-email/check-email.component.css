@@ -1,0 +1,20 @@
+/* @import url(https://fonts.googleapis.com/css?family=Roboto:400,900,500); */
+.fullscreen {
+  background-image: url("../../assets/ship-boat-lake-garda-italy.jpg");
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.fullscreen h1 {
+  font-family: 'Lucida Sans Unicode', 'Lucida Sans Regular', 'Lucida Grande',  Geneva, Verdana, sans-serif;
+  color: #483c26;
+  position: relative;
+  top: -77px;
+}
+

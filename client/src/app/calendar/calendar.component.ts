@@ -30,6 +30,11 @@ export class CalendarComponent implements OnInit {
     message: "",
   }
   loginUser = "none";
+
+  saveTime={
+    start:[],
+    to:[]
+  }
   
   constructor(private atp: AmazingTimePickerService, private _service: MainService) { }
 
@@ -48,7 +53,6 @@ export class CalendarComponent implements OnInit {
           this.loginUser = "none";
         }
       });
-    console.log("loginuser", this.loginUser);    
     
   }
 
@@ -95,22 +99,41 @@ export class CalendarComponent implements OnInit {
       NumOfCrew: Number,
       message: "",
     }
+    this.saveTime={
+      start:[],
+      to:[]
+    }
   }
 
   timeFrom() {
     const amazingTimePicker = this.atp.open();
     amazingTimePicker.afterClose().subscribe(time => {
       console.log(time);
-      this.student.timeFrom = time;
-      this.captain.timeFrom = time;
+      var parts = time.match(/(\d+)\:(\d+)/)
+      this.saveTime.start[0] = time;
+      this.saveTime.start[1] = parseInt(parts[1])*60 + parseInt(parts[2])
+      this.saveTime.start[2] = parseInt(parts[1])
+      this.saveTime.start[3] = parseInt(parts[2])
+      if(this.saveTime.to[1] == undefined || this.saveTime.start[1] <= this.saveTime.to[1]){
+        this.student.timeFrom = time;
+        this.captain.timeFrom = time;
+      }
+      
     });
   }
   timeTo() {
     const amazingTimePicker = this.atp.open();
     amazingTimePicker.afterClose().subscribe(time => {
       console.log(time);
-      this.student.timeTo = time;
-      this.captain.timeTo = time;
+      var parts = time.match(/(\d+)\:(\d+)/)
+      this.saveTime.to[0] = time;
+      this.saveTime.to[1] = parseInt(parts[1])*60 + parseInt(parts[2])
+      this.saveTime.to[2] = parseInt(parts[1])
+      this.saveTime.to[3] = parseInt(parts[2])
+      if(this.saveTime.start[1] == undefined || this.saveTime.start[1] <= this.saveTime.to[1]){
+        this.student.timeTo = time;
+        this.captain.timeTo = time;
+      }
     });
   }
 
@@ -126,7 +149,6 @@ export class CalendarComponent implements OnInit {
   
 
   display_calendar(eventsData) {
-    var log_user = this.loginUser;
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -141,27 +163,24 @@ export class CalendarComponent implements OnInit {
       url: '#',
       editable: true,
       eventClick: function (e) {
-        console.log(e);
-        if(log_user !== "none") {
-          if(log_user == "student") {
-            $("#myModal0").fadeIn();
-            $("#date").html(`He/She would like to set sail in: ${e.date.slice(0,10)}`);
-            $("#title").html(`${e.title}`);
-            $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
-            $("#Message").html(`Message to Would-be Captains: ${e.message}`);
-          }
-          if(log_user == "captain") {
-            $("#myModal0").fadeIn();
-            $("#date").html(`He/She would like to set sail in: ${e.date.slice(0, 10)}`);
-            $("#title").html(`${e.title}`);
-            $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
-            $("#vessel").html(`Vessel: ${e.vessel}`);
-            $("#numCrew").html(`Number of Crew is seeking: ${e.NumOfCrew}`);
-            $("#Message").html(`Captains Log (Message): ${e.message}`);
 
-          }
+        if(e.spec !== undefined) {
+          $("#myModal0").fadeIn();
+          $("#date").html(`He/She would like to set sail in: ${e.date.slice(0, 10)}`);
+          $("#title").html(`${e.title}`);
+          $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+          $("#vessel").html(`Vessel: ${e.vessel}`);
+          $("#numCrew").html(`Number of Crew is seeking: ${e.NumOfCrew}`);
+          $("#Message").html(`Captains Log (Message): ${e.message}`);
         }
-        
+        else {
+          $("#myModal0").fadeIn();
+          $("#date").html(`He/She would like to set sail in: ${e.date}`);
+          $("#title").html(`${e.title}`);
+          $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+          $("#Message").html(`Message to Would-be Captains: ${e.message}`);
+        }
+
       },
       events: eventsData,
 
@@ -174,8 +193,20 @@ export class CalendarComponent implements OnInit {
         }
         
       },
+      eventAfterRender: (event, element, view) => {
+        console.log(event)
+        if(event.vessel !== undefined) {
+          element.css('background-color', 'rgba(179, 225, 247, 1)');
+          element.css('border', 'none');
+        }
+        else {
+          element.css('background-color', '#CDDC39');
+          element.css('border', 'none');          
+        }
+      }
       
     });
+    
 
   }
 
