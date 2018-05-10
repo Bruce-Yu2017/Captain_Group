@@ -30,6 +30,11 @@ export class CalendarComponent implements OnInit {
     message: "",
   }
   loginUser = "none";
+
+  saveTime={
+    start:[],
+    to:[]
+  }
   
   constructor(private atp: AmazingTimePickerService, private _service: MainService) { }
 
@@ -94,22 +99,41 @@ export class CalendarComponent implements OnInit {
       NumOfCrew: Number,
       message: "",
     }
+    this.saveTime={
+      start:[],
+      to:[]
+    }
   }
 
   timeFrom() {
     const amazingTimePicker = this.atp.open();
     amazingTimePicker.afterClose().subscribe(time => {
       console.log(time);
-      this.student.timeFrom = time;
-      this.captain.timeFrom = time;
+      var parts = time.match(/(\d+)\:(\d+)/)
+      this.saveTime.start[0] = time;
+      this.saveTime.start[1] = parseInt(parts[1])*60 + parseInt(parts[2])
+      this.saveTime.start[2] = parseInt(parts[1])
+      this.saveTime.start[3] = parseInt(parts[2])
+      if(this.saveTime.to[1] == undefined || this.saveTime.start[1] <= this.saveTime.to[1]){
+        this.student.timeFrom = time;
+        this.captain.timeFrom = time;
+      }
+      
     });
   }
   timeTo() {
     const amazingTimePicker = this.atp.open();
     amazingTimePicker.afterClose().subscribe(time => {
       console.log(time);
-      this.student.timeTo = time;
-      this.captain.timeTo = time;
+      var parts = time.match(/(\d+)\:(\d+)/)
+      this.saveTime.to[0] = time;
+      this.saveTime.to[1] = parseInt(parts[1])*60 + parseInt(parts[2])
+      this.saveTime.to[2] = parseInt(parts[1])
+      this.saveTime.to[3] = parseInt(parts[2])
+      if(this.saveTime.start[1] == undefined || this.saveTime.start[1] <= this.saveTime.to[1]){
+        this.student.timeTo = time;
+        this.captain.timeTo = time;
+      }
     });
   }
 
