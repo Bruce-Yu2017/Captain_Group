@@ -24,6 +24,10 @@ export class HeaderComponent implements OnInit {
         $('#return-to-top').fadeOut('fast');
       }
     })
+
+    // $('.textShow').hide();
+
+
   }
 
   arrowClick(event) {
