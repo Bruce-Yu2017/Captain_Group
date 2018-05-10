@@ -19,6 +19,15 @@ body {
     color: bisque;
 }
 
+.container {
+    padding: 10px;
+}
+
+#content {
+    border: 5px solid bisque;
+    border-radius: 1rem;
+}
+
 .showcase {
     text-align: center;
     display: flex;
