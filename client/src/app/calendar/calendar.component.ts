@@ -47,6 +47,7 @@ export class CalendarComponent implements OnInit {
           this.loginUser = "none";
         }
       });
+    console.log("loginuser", this.loginUser);    
     
   }
 
@@ -124,16 +125,7 @@ export class CalendarComponent implements OnInit {
   
 
   display_calendar(eventsData) {
-    var modal0 = document.getElementById('myModal0');
-    var modal1 = document.getElementById('myModal1');
-    var modal2 = document.getElementById('myModal2');
-    window.onclick = function (event) {
-      if (event.target == modal1 || event.target == modal2 || event.target == modal0) {
-        $("#myModal0").fadeOut();
-        $("#myModal1").fadeOut();
-        $("#myModal2").fadeOut();
-      }
-    }
+    var log_user = this.loginUser;
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -148,9 +140,27 @@ export class CalendarComponent implements OnInit {
       url: '#',
       editable: true,
       eventClick: function (e) {
-        $("#myModal0").fadeIn();
-        $("#title").html(`${e.title}`);
-        $("#content").html(`Created at: ${new Date(2018, 4, 7, 9, 0o0)}`);
+        console.log(e);
+        if(log_user !== "none") {
+          if(log_user == "student") {
+            $("#myModal0").fadeIn();
+            $("#date").html(`He/She would like to set sail in: ${e.date.slice(0,10)}`);
+            $("#title").html(`${e.title}`);
+            $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+            $("#Message").html(`Message to Would-be Captains: ${e.message}`);
+          }
+          if(log_user == "captain") {
+            $("#myModal0").fadeIn();
+            $("#date").html(`He/She would like to set sail in: ${e.date.slice(0, 10)}`);
+            $("#title").html(`${e.title}`);
+            $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+            $("#vessel").html(`Vessel: ${e.vessel}`);
+            $("#numCrew").html(`Number of Crew is seeking: ${e.NumOfCrew}`);
+            $("#Message").html(`Captains Log (Message): ${e.message}`);
+
+          }
+        }
+        
       },
       events: eventsData,
 
