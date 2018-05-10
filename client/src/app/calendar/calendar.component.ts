@@ -39,8 +39,12 @@ export class CalendarComponent implements OnInit {
 
     this._service.loginstatus.subscribe(
       (data) => {
+        console.log('data: ', data);
         if(data[0].user != null){
           this.loginUser = data[0].user.identity;
+        }
+        if(data[0].user == null){
+          this.loginUser = "none";
         }
       });
     
@@ -176,6 +180,7 @@ export class CalendarComponent implements OnInit {
     }else{
       return;
     }
+    $("#myModal1").fadeOut();
   }
 
 

@@ -132,9 +132,9 @@ export class NavbarComponent implements OnInit {
     this._service.loginstatus.subscribe(
       (data) => {
         if(data[0].mesg == "reg"){
-
+          this.display_reg();
         }else if(data[0].mesg == "log"){
-
+          this.display_login();
         }
       });
   }
@@ -177,6 +177,11 @@ export class NavbarComponent implements OnInit {
   logout() {
     this._service.logout();
     this.logged_user = undefined;
+    let data = [{
+      user: null,
+      mesg: null
+    }]
+    this._service.updateLoginStatus(data);
   }
 
   click() {
