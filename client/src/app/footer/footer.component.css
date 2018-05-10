@@ -1,15 +1,27 @@
-footer{
-    background-color:#466481;
-    height: 100px;
+html,
+body{
+    margin: 0;
+    display: table;
 }
 
-p{
-    color: white;
-    margin: 0;
-    /* float: left; */
+.wrapper{
+    padding: 20px;
+    height: auto;
+}
+
+footer{
+    background-color:#466481;
+    display: tabl-row;
+    height: auto;
+
 }
 
 img{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+}
+
+footer p{
+    color: white;
 }
