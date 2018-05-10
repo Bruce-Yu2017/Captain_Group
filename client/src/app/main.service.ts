@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'Rxjs';
 
 @Injectable()
 export class MainService {
-  
+  show = true;
   currentUser = null;
 
   all_events: BehaviorSubject<any[]> = new BehaviorSubject([]);

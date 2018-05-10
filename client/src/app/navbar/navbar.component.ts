@@ -132,9 +132,15 @@ export class NavbarComponent implements OnInit {
   display_login() {
     $("#loginForm").fadeIn();
   }
+  display_reg() {
+    $("#regForm").fadeIn();
+  }
 
-  closeModal() {
+  closeLogin() {
     $("#loginForm").fadeOut();
+  }
+  closeReg() {
+    $("#regForm").fadeOut();
   }
 
   login() {
@@ -142,7 +148,7 @@ export class NavbarComponent implements OnInit {
       (res) => {
         if(res.error == undefined) {
           this.logged_user = res.name;
-          this.closeModal()
+          this.closeLogin()
 
         }
         else {
@@ -161,6 +167,29 @@ export class NavbarComponent implements OnInit {
   logout() {
     this._service.logout();
     this.logged_user = undefined;
+  }
+
+  click() {
+    if (this._service.show === true) {
+      document.getElementById('check_box').style.display = 'block';
+      this._service.show = false;
+    } else {
+      document.getElementById('check_box').style.removeProperty('display');
+      this._service.show = true;
+    }
+  }
+
+  close() {
+    document.addEventListener("click", function (e) {
+      let box = document.getElementById("check_box");
+      if (box.style.display === "block") {
+        if (e.target !== box && e.target !== document.getElementById("menu-icon")) {
+          box.style.removeProperty("display");
+
+        }
+      }
+    })
+    this._service.show = true;
   }
 
 
