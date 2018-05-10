@@ -126,7 +126,6 @@ export class CalendarComponent implements OnInit {
   
 
   display_calendar(eventsData) {
-    var log_user = this.loginUser;
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -141,27 +140,22 @@ export class CalendarComponent implements OnInit {
       url: '#',
       editable: true,
       eventClick: function (e) {
-        console.log(e);
-        if(log_user !== "none") {
-          if(log_user == "student") {
-            $("#myModal0").fadeIn();
-            $("#date").html(`He/She would like to set sail in: ${e.date.slice(0,10)}`);
-            $("#title").html(`${e.title}`);
-            $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
-            $("#Message").html(`Message to Would-be Captains: ${e.message}`);
-          }
-          if(log_user == "captain") {
-            $("#myModal0").fadeIn();
-            $("#date").html(`He/She would like to set sail in: ${e.date.slice(0, 10)}`);
-            $("#title").html(`${e.title}`);
-            $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
-            $("#vessel").html(`Vessel: ${e.vessel}`);
-            $("#numCrew").html(`Number of Crew is seeking: ${e.NumOfCrew}`);
-            $("#Message").html(`Captains Log (Message): ${e.message}`);
-
-          }
+        if(e.spec !== undefined) {
+          $("#myModal0").fadeIn();
+          $("#date").html(`He/She would like to set sail in: ${e.date.slice(0, 10)}`);
+          $("#title").html(`${e.title}`);
+          $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+          $("#vessel").html(`Vessel: ${e.vessel}`);
+          $("#numCrew").html(`Number of Crew is seeking: ${e.NumOfCrew}`);
+          $("#Message").html(`Captains Log (Message): ${e.message}`);
         }
-        
+        else {
+          $("#myModal0").fadeIn();
+          $("#date").html(`He/She would like to set sail in: ${e.date.slice(0, 10)}`);
+          $("#title").html(`${e.title}`);
+          $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+          $("#Message").html(`Message to Would-be Captains: ${e.message}`);
+        }
       },
       events: eventsData,
 
