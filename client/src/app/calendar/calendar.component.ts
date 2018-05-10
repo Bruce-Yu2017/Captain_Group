@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AmazingTimePickerService } from 'amazing-time-picker';
 import { MainService } from '../main.service';
+import * as moment from 'moment';
 declare var jquery:any;
 declare var $ :any;
 
@@ -164,12 +165,16 @@ export class CalendarComponent implements OnInit {
       },
       events: eventsData,
 
-      dayClick: (e) => {
-        this.student.date = e;
-        this.captain.date = e;
-        this.date_display = e.format()
-        $("#myModal1").fadeIn();
-      }
+      dayClick: (date, jsEvent, view) => {
+        if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
+          this.student.date = date;
+          this.captain.date = date;
+          this.date_display = date.format()
+          $("#myModal1").fadeIn();
+        }
+        
+      },
+      
     });
 
   }
