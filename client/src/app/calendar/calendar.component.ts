@@ -175,7 +175,7 @@ export class CalendarComponent implements OnInit {
         }
         else {
           $("#myModal0").fadeIn();
-          $("#date").html(`He/She would like to set sail in: ${e.date.slice(0, 10)}`);
+          $("#date").html(`He/She would like to set sail in: ${e.date}`);
           $("#title").html(`${e.title}`);
           $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
           $("#Message").html(`Message to Would-be Captains: ${e.message}`);
