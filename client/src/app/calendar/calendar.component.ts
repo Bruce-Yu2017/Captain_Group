@@ -48,7 +48,6 @@ export class CalendarComponent implements OnInit {
           this.loginUser = "none";
         }
       });
-    console.log("loginuser", this.loginUser);    
     
   }
 
@@ -140,6 +139,7 @@ export class CalendarComponent implements OnInit {
       url: '#',
       editable: true,
       eventClick: function (e) {
+
         if(e.spec !== undefined) {
           $("#myModal0").fadeIn();
           $("#date").html(`He/She would like to set sail in: ${e.date.slice(0, 10)}`);
@@ -156,6 +156,7 @@ export class CalendarComponent implements OnInit {
           $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
           $("#Message").html(`Message to Would-be Captains: ${e.message}`);
         }
+
       },
       events: eventsData,
 
@@ -170,6 +171,7 @@ export class CalendarComponent implements OnInit {
       },
       
     });
+    
 
   }
 
