@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { init } from 'ityped';
+import { MainService } from "./../main.service";
 
 declare var jquery: any;
 declare var $: any;
@@ -11,7 +12,7 @@ declare var $: any;
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _service: MainService) { }
 
   ngOnInit() {
     $('#return-to-top').hide();
@@ -24,15 +25,30 @@ export class HeaderComponent implements OnInit {
         $('#return-to-top').fadeOut('fast');
       }
     })
+
+    // $('.textShow').hide();
+
+
   }
 
   arrowClick(event) {
-    console.log('BUTTON');
     window.scroll({
       top: 0,
       behavior: 'smooth'
     });
 
+  }
+
+  scrollToCalendar() {
+    this._service.scrollDownFromHeader.next(["Tocalendar"]);
+  }
+
+  display_login() {
+    let data = [{
+      user: null,
+      mesg: "log"
+    }]
+    this._service.updateLoginStatus(data);
   }
 
 

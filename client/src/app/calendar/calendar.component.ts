@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AmazingTimePickerService } from 'amazing-time-picker';
 import { MainService } from '../main.service';
+import * as moment from 'moment';
 declare var jquery:any;
 declare var $ :any;
 
@@ -124,16 +125,6 @@ export class CalendarComponent implements OnInit {
   
 
   display_calendar(eventsData) {
-    var modal0 = document.getElementById('myModal0');
-    var modal1 = document.getElementById('myModal1');
-    var modal2 = document.getElementById('myModal2');
-    window.onclick = function (event) {
-      if (event.target == modal1 || event.target == modal2 || event.target == modal0) {
-        $("#myModal0").fadeOut();
-        $("#myModal1").fadeOut();
-        $("#myModal2").fadeOut();
-      }
-    };
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -148,18 +139,37 @@ export class CalendarComponent implements OnInit {
       url: '#',
       editable: true,
       eventClick: function (e) {
-        $("#myModal0").fadeIn();
-        $("#title").html(`${e.title}`);
-        $("#content").html(`Created at: ${new Date(2018, 4, 7, 9, 0o0)}`);
+
+        if(e.spec !== undefined) {
+          $("#myModal0").fadeIn();
+          $("#date").html(`He/She would like to set sail in: ${e.date.slice(0, 10)}`);
+          $("#title").html(`${e.title}`);
+          $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+          $("#vessel").html(`Vessel: ${e.vessel}`);
+          $("#numCrew").html(`Number of Crew is seeking: ${e.NumOfCrew}`);
+          $("#Message").html(`Captains Log (Message): ${e.message}`);
+        }
+        else {
+          $("#myModal0").fadeIn();
+          $("#date").html(`He/She would like to set sail in: ${e.date.slice(0, 10)}`);
+          $("#title").html(`${e.title}`);
+          $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+          $("#Message").html(`Message to Would-be Captains: ${e.message}`);
+        }
+
       },
       events: eventsData,
 
-      dayClick: (e) => {
-        this.student.date = e;
-        this.captain.date = e;
-        this.date_display = e.format()
-        $("#myModal1").fadeIn();
-      }
+      dayClick: (date, jsEvent, view) => {
+        if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
+          this.student.date = date;
+          this.captain.date = date;
+          this.date_display = date.format()
+          $("#myModal1").fadeIn();
+        }
+        
+      },
+      
     });
     
 

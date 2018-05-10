@@ -29,14 +29,22 @@
   <div class="modal-content">
     <form (submit) = "student_submit()">
       <h1>Crew Seeking Vessel</h1>
-      <label for="">Date</label>
-      <input type="text" name="date" disabled [(ngModel)] ="date_display">
-      <label>Time From: </label>
-      <input (click) ="timeFrom()" value ={{student.timeFrom}}>
-      <label>Time To: </label>
-      <input (click) ="timeTo()" value ={{student.timeTo}}>
-      <label for="">Message to Would-be Captains:</label>
-      <textarea name="message" cols="30" rows="10" [(ngModel)] ="student.message"></textarea>
+      <div class="form-group">
+      <label for="">Date</label><br>
+      <input type="text" class="form-control" name="date" disabled [(ngModel)] ="date_display"><br>
+    </div>
+    <div class="form-group">
+      <label>Time From: </label><br>
+      <input (click) ="timeFrom()" class="form-control" value ={{student.timeFrom}}><br>
+    </div>
+    <div class="form-group">
+      <label>Time To: </label><br>
+      <input (click) ="timeTo()" class="form-control" value ={{student.timeTo}}><br>
+    </div>
+    <div class="form-group">
+      <label for="">Message to Would-be Captains:</label><br>
+      <textarea name="message" class="form-control" cols="30" rows="3" [(ngModel)] ="student.message"></textarea>
+    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click) ="closeModal()">Close</button>
         <button class="btn btn-info">Submit</button>
@@ -51,27 +59,27 @@
   <div class="modal-content">
     <form (submit)="captain_submit()">
       <h1>Captain Seeking Crew</h1>
+      <div class="form-group"><label for="">Date</label>
+        <input type="text" class="form-control" name="date" disabled [(ngModel)]="date_display"></div>
+      <div class="form-group"><label>Time From: </label>
+        <input (click)="timeFrom()" class="form-control" value= {{captain.timeFrom}}></div>
+      <div class="form-group"><label>Time To: </label>
+        <input (click)="timeTo()" class="form-control" value= {{captain.timeTo}}></div>
+      <div class="form-group"><label for="">Vessel:</label>
+        <input type="text" class="form-control" name="vessel" [(ngModel)] ="captain.vessel"></div>
+        <div class="form-group"><label for="">Specs:</label>
+          <input type="text" class="form-control" name="specs" [(ngModel)] ="captain.spec"></div>
+        <div class="form-group"><label for="">Captains Log (Message):</label>
+          <textarea name="message" class="form-control" rows="3" [(ngModel)]="captain.message"></textarea></div>
+        <div class="form-group"><label for="">Number of Crew You Seek:</label>
+          <input type="number" class="form-control" name="num_of_crew" [(ngModel)] ="captain.NumOfCrew"></div>
 
-      <label for="">Date</label>
-      <input type="text" name="date" disabled [(ngModel)]="date_display">
 
-      <label>Time From: </label>
-      <input (click)="timeFrom()" value= {{captain.timeFrom}}>
+      
 
-      <label>Time To: </label>
-      <input (click)="timeTo()" value= {{captain.timeTo}}>
+      
 
-      <label for="">Vessel:</label>
-      <input type="text" name="vessel" [(ngModel)] ="captain.vessel">
-
-      <label for="">Specs:</label>
-      <input type="text" name="specs" [(ngModel)] ="captain.spec">
-
-      <label for="">Captains Log (Message):</label>
-      <textarea name="message" cols="30" rows="10" [(ngModel)]="captain.message"></textarea>
-
-      <label for="">Number of Crew You Seek:</label>
-      <input type="number" name="num_of_crew" [(ngModel)] ="captain.NumOfCrew">
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal" (click) ="closeModal()">Close</button>
         <button class="btn btn-info">Submit</button>
