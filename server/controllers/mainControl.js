@@ -66,8 +66,8 @@ module.exports = {
                     var transporter = nodemailer.createTransport({
                       service: 'gmail',
                       auth: {
-                        user: 'foodreadyoh@gmail.com',
-                        pass: 'codingdojo2018'
+                        user: 'gpycwsp@gmail.com',
+                        pass: 'WomenRuleGPYC'
                       }
                     });
 
@@ -115,6 +115,33 @@ module.exports = {
           user.status = 1;
           user.save((err) => {
             res.json({user: user});
+            var mailToOwner = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                user: 'gpycwsp@gmail.com',
+                pass: 'WomenRuleGPYC'
+              }
+            });
+
+            var content = `
+                      <h1>There is a new user account just activated!</h1>
+                      <p>User Name: ${user.name}</p>
+                      <p>Identity: ${user.identity}</p>
+                      `
+            var mailOptions = {
+              from: 'gpycwsp@gmail.com',
+              to: "gpycwsp@gmail.com",
+              subject: 'A New User Account Activated!',
+              html: content
+            };
+
+            mailToOwner.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);
+              }
+            });
           })
           
         }
