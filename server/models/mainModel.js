@@ -15,6 +15,8 @@ var UserSchema = new mongoose.Schema({
   experience: {type: Number},
   boat_name: {type: String},
   spec: {type: String}
+}, {
+  usePushEach: true
 })
 var User = mongoose.model("User", UserSchema);
 
