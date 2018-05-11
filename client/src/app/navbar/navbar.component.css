@@ -124,7 +124,7 @@ header {
 .navbar-brand span {
     color: whitesmoke;
     margin-left: 10px;
-    font-size: 23px;
+    font-size: 17px;
 }
 
 .user_name {
@@ -200,7 +200,7 @@ p {
     margin-bottom: 20px;
 }
 
-@media only screen and (max-width: 915px) {
+@media only screen and (max-width: 970px) {
     header {
         position: fixed;
     }

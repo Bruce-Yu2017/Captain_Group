@@ -143,6 +143,14 @@ h1 {
     h1 {
         font-size: 2rem !important;
     }
+    .btn_event_calendar{
+        font-size: 15px;
+        width: 156px;
+    }
+    .btn_jump_login {
+        font-size: 15px;
+        width: 156px;        
+    }
 }
 
 @media only screen and (max-width: 1024px) {

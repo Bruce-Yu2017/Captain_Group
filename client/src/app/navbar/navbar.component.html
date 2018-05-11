@@ -41,15 +41,15 @@
     <div class="modal-content">
       <div style="text-align: center">
         <span id="reg1">
-          <button>Request as Caption</button>
+          <button>Register as Captain</button>
         </span>
         <span id="reg2">
-          <button>Request as Student</button>
+          <button>Register as Student</button>
         </span>
       </div>
       
         <form id="cap" (submit)="capReg()">
-          <h4>Request as Caption</h4>
+          <h4>Register as Captain</h4>
           <div class="form-group">
             <label for="">Your Name</label>
             <input type="text" class="form-control" name="name" [(ngModel)]="captain_reg.name" placeholder="Your name..." #capName="ngModel"
@@ -144,7 +144,7 @@
 
           <div class="form-group">
             <label>Password</label>
-            <input type="text" class="form-control" required minlength="4" name="password" [(ngModel)]="captain_reg.password" placeholder="Password..."
+            <input type="password" class="form-control" required minlength="4" name="password" [(ngModel)]="captain_reg.password" placeholder="Password..."
               #hash="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="hash.invalid && (hash.dirty || hash.touched)">
@@ -169,7 +169,7 @@
 
         <!-- student -->
         <form id="student" (submit)="studentReg()">
-          <h4>Request as Student</h4>
+          <h4>Register as Student</h4>
           <div class="form-group">
             <label for="">Your Name</label>
             <input type="text" class="form-control" name="name" [(ngModel)]="student_reg.name" placeholder="Your name..." #studentName="ngModel"
