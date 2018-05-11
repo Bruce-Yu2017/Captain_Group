@@ -72,10 +72,10 @@ module.exports = {
                     });
 
                     var content = `
-                      <h1>Hello ${new_user.name},</h1>
-                      <p>You have opened a new account in Great Pond Yacht Club. Please click on this link below to activate your account: </p>
-                      <a href="http://localhost:8000/activate/${new_user.token}">Activate</a>
-                      <p>This link will expire in 1 hours.</p>
+                      <h2>Hello ${new_user.name},</h2>
+                      <p>You have opened a new account in Great Pond Yacht Club. </p><br>
+                      <a href="http://localhost:8000/activate/${new_user.token}">Please activate your account here: Activate</a>
+                      <p>This link will expire in 1 hour.</p>
                       <h3>Greatpondyachtclub team</h3>
                       `
                     var mailOptions = {
