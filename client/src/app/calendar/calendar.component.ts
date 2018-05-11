@@ -203,7 +203,8 @@ export class CalendarComponent implements OnInit {
           element.css('background-color', '#CDDC39');
           element.css('border', 'none');          
         }
-      }
+      },
+      displayEventTime: false 
       
     });
     
