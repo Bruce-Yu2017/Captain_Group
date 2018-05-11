@@ -234,6 +234,12 @@ p {
     header {
         position: fixed;
     }
+    .navbar-brand span {
+        display: none;
+    }
+    .user_name {
+        display: none;
+    }
     #menu-icon {
         display: inline-block;
     }
