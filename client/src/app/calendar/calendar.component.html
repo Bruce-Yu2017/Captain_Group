@@ -17,8 +17,8 @@
 <div id="myModal1" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
-    <button *ngIf="loginUser == 'student'" class="btn btn-primary butt1" (click) = "student_req()">Student request</button>
-    <button *ngIf="loginUser == 'captain'" class="btn btn-primary butt2" (click) = "captain_req()">Captain request</button>
+    <button *ngIf="loginUser == 'student'" class="btn btn-primary butt1" (click) = "student_req()">Seeking Vessel</button>
+    <button *ngIf="loginUser == 'captain'" class="btn btn-primary butt2" (click) = "captain_req()">Seeking Crew</button>
     <button *ngIf="loginUser == 'none'" class="btn btn-primary butt3" (click) = "req_login('log')">Login</button>
     <button *ngIf="loginUser == 'none'" class="btn btn-primary butt4" (click) = "req_login('reg')">Register</button>
   </div>
