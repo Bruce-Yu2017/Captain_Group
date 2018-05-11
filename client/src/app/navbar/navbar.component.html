@@ -236,7 +236,7 @@
 
           <div class="form-group">
             <label>Password</label>
-            <input type="text" class="form-control" required minlength="4" name="stupassword" [(ngModel)]="student_reg.password" placeholder="Password..."
+            <input type="password" class="form-control" required minlength="4" name="stupassword" [(ngModel)]="student_reg.password" placeholder="Password..."
               #stuhash="ngModel">
           </div>
           <div class="alert alert-danger" *ngIf="stuhash.invalid && (stuhash.dirty || stuhash.touched)">
