@@ -41,9 +41,10 @@ li {
 
 #menu-icon {
     display: hidden;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background: #ffd701 url("/assets/images/menu-icon.png") center;
+    border-radius: 9px;
 }
 
 /* The Modal (background) */
@@ -153,8 +154,8 @@ nav {
 
 #menu-icon {
     display: hidden;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background: #ffd701 url("../../assets/menu-icon.png") center;
     cursor: pointer;
 }
@@ -207,9 +208,9 @@ p {
     .navbar-brand span {
         display: none;
     }
-    .user_name {
+    /* .user_name {
         display: none;
-    }
+    } */
     #menu-icon {
         display: inline-block;
     }

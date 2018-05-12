@@ -12,11 +12,11 @@
       <ul id="check_box">
         <li>
           <button type="button" class="btn btn-primary navbar-btn" (click) ="scrollTo()">
-            <i class="ion-calendar"></i> Event Calender</button>
+            <i class="ion-calendar"></i> Calender</button>
         </li>
         <li>
           <button *ngIf="logged_user == undefined" type="submit" class="btn btn-primary" (click)="display_reg()">
-            <i class="ion-android-boat"></i> Captain/Student Registration</button>
+            <i class="ion-android-boat"></i> Register</button>
         </li>
         <li>
           <button *ngIf="logged_user == undefined" type="button" class="btn btn-success" (click)="display_login()">
