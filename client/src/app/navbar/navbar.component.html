@@ -65,6 +65,7 @@
             <input type="text" class="form-control" required pattern="[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]*\.([a-z]{2,4})" name="email"
               [(ngModel)]="captain_reg.email" placeholder="Your email..." #email="ngModel">
           </div>
+
           <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
             <strong>A Wow! email is required and checking the format !!!</strong>
           </div>
@@ -78,87 +79,95 @@
             <input type="tel" class="form-control" name="phone" [(ngModel)]="captain_reg.phone" placeholder="Your Phone..." required
               #phone="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+          <!-- <div class="alert alert-danger" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
             <strong>Phone is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="">Address</label>
             <input type="text" class="form-control" name="address" [(ngModel)]="captain_reg.address[0]" placeholder="Your address..."
               required #address="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="address.invalid && (address.dirty || address.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="address.invalid && (address.dirty || address.touched)">
             <strong>Address is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="">City</label>
             <input type="text" class="form-control" name="city" [(ngModel)]="captain_reg.address[1]" placeholder="City..." required #city="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="city.invalid && (city.dirty || city.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="city.invalid && (city.dirty || city.touched)">
             <strong>City is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="">State</label>
             <input type="text" class="form-control" name="state" [(ngModel)]="captain_reg.address[2]" placeholder="State..." required
               #state="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="state.invalid && (state.dirty || state.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="state.invalid && (state.dirty || state.touched)">
             <strong>State is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="">Zip</label>
             <input type="text" class="form-control" name="zip" [(ngModel)]="captain_reg.address[3]" placeholder="Zip..." required #zip="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="zip.invalid && (zip.dirty || zip.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="zip.invalid && (zip.dirty || zip.touched)">
             <strong>Zip is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="">Experience</label>
             <input type="number" class="form-control" name="experience" [(ngModel)]="captain_reg.experience" placeholder="Experience..."
               required #exp="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="exp.invalid && (exp.dirty || exp.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="exp.invalid && (exp.dirty || exp.touched)">
             <strong>Experience is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="">Boat Name</label>
             <input type="text" class="form-control" name="boat" [(ngModel)]="captain_reg.boat_name" placeholder="Boat Name..." required
               #boat="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="boat.invalid && (boat.dirty || boat.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="boat.invalid && (boat.dirty || boat.touched)">
             <strong>Boat name is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="">Spec</label>
             <input type="text" class="form-control" name="spec" [(ngModel)]="captain_reg.spec" placeholder="Boat Name..." required #spec="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="spec.invalid && (spec.dirty || spec.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="spec.invalid && (spec.dirty || spec.touched)">
             <strong>Spec name is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label>Password</label>
             <input type="password" class="form-control" required minlength="4" name="password" [(ngModel)]="captain_reg.password" placeholder="Password..."
               #hash="ngModel">
           </div>
+
           <div class="alert alert-danger" *ngIf="hash.invalid && (hash.dirty || hash.touched)">
             <strong>A Wow! password is required and must be 4 characters long !!!</strong>
           </div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Confirm Password</label>
             <input type="password" [(ngModel)]="pass_con" required minlength="4" #pw_confirm="ngModel" pattern="{{captain_reg.password}}"
               placeholder="password confirmation" class="form-control" name="pw_confirm">
           </div>
           <div class="alert alert-danger" *ngIf="pw_confirm.invalid && (pw_confirm.dirty || pw_confirm.touched)">
             <strong>A Wow! password is not matched !!!</strong>
-          </div>
+          </div> -->
 
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" (click)="closeReg()">Close</button>
@@ -195,42 +204,47 @@
             <input type="tel" class="form-control" name="phone" [(ngModel)]="student_reg.phone" placeholder="Your Phone..." required
               #phone="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
             <strong>Phone is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="">Address</label>
             <input type="text" class="form-control" name="address" [(ngModel)]="student_reg.address[0]" placeholder="Your address..." required
               #address="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="address.invalid && (address.dirty || address.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="address.invalid && (address.dirty || address.touched)">
             <strong>Address is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="">City</label>
             <input type="text" class="form-control" name="city" [(ngModel)]="student_reg.address[1]" placeholder="City..." required #city="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="city.invalid && (city.dirty || city.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="city.invalid && (city.dirty || city.touched)">
             <strong>City is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="">State</label>
             <input type="text" class="form-control" name="state" [(ngModel)]="student_reg.address[2]" placeholder="State..." required #state="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="state.invalid && (state.dirty || state.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="state.invalid && (state.dirty || state.touched)">
             <strong>State is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
           <div class="form-group">
             <label for="">Zip</label>
             <input type="text" class="form-control" name="zip" [(ngModel)]="student_reg.address[3]" placeholder="Zip..." required #zip="ngModel">
           </div>
-          <div class="alert alert-danger" *ngIf="zip.invalid && (zip.dirty || zip.touched)">
+
+          <!-- <div class="alert alert-danger" *ngIf="zip.invalid && (zip.dirty || zip.touched)">
             <strong>Zip is required and checking the format !!!</strong>
-          </div>
+          </div> -->
 
 
 
@@ -242,7 +256,7 @@
           <div class="alert alert-danger" *ngIf="stuhash.invalid && (stuhash.dirty || stuhash.touched)">
             <strong>A Wow! password is required and must be 4 characters long !!!</strong>
           </div>
-
+<!-- 
           <div class="form-group">
             <label>Confirm Password</label>
             <input type="password" [(ngModel)]="pass_con" required minlength="4" #pw_confirm="ngModel" pattern="{{student_reg.password}}"
@@ -250,7 +264,8 @@
           </div>
           <div class="alert alert-danger" *ngIf="pw_confirm.invalid && (pw_confirm.dirty || pw_confirm.touched)">
             <strong>A Wow! password is not matched !!!</strong>
-          </div>
+          </div> -->
+
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" (click)="closeReg()">Close</button>
             <button type="submit" class="btn btn-info">Submit</button>
@@ -275,8 +290,10 @@
             #log_email="ngModel" required>
           <div *ngIf="log_email.invalid && (log_email.dirty || log_email.touched)">
             <div class="alert alert-dismissible alert-danger aler_log" role="alert">
-              <div *ngIf="log_email.errors.required">
-                <span> Email is required.</span>
+              <div *ngIf="log_email.errors">
+                <strong>
+                  <span> Email is required.</span>
+                </strong>
               </div>
             </div>
           </div>
@@ -288,8 +305,10 @@
             #log_password="ngModel" required>
           <div *ngIf="log_password.invalid && (log_password.dirty || log_password.touched)">
             <div class="alert alert-dismissible alert-danger aler_log" role="alert">
-              <div *ngIf="log_password.errors.required">
-                <span> Password is required.</span>
+              <div *ngIf="log_password.errors">
+                <strong>
+                  <span> Password is required.</span>
+                </strong>
               </div>
             </div>
           </div>
