@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AmazingTimePickerService } from 'amazing-time-picker';
 import { MainService } from '../main.service';
+
 import * as moment from 'moment';
 declare var jquery:any;
 declare var $ :any;
@@ -12,6 +13,20 @@ declare var $ :any;
 })
 export class CalendarComponent implements OnInit {
   date_display;
+  eventUpdate = {
+    date: null,
+    timeFrom: null,
+    timeTo: null,
+    vessel: null,
+    spec: null,
+    message: null,
+    NumOfCrew: null
+  };
+  user_data = {
+    _id: null
+  };
+  event_created_by;
+  event_id;
   student = {
     title: "",
     date: null,
@@ -42,17 +57,34 @@ export class CalendarComponent implements OnInit {
     this._service.getAllEvents((res) => {
       this.display_calendar(res);
     }) 
+    var modal5 = document.getElementById('myModal5');        
+    var modal4 = document.getElementById('myModal4');    
+    var modal3 = document.getElementById('myModal3');
+    var modal2 = document.getElementById('myModal2');
+    var modal1 = document.getElementById('myModal1');
+    var modal0 = document.getElementById('myModal0');
+    
+    window.onclick = function (event) {
+      if (event.target == modal3 || event.target == modal2 || event.target == modal1 || event.target == modal0 || event.target == modal4 || event.target == modal5  ) {
+        $(".modal").fadeOut();
+      }
+      
+      
+    }
 
     this._service.loginstatus.subscribe(
       (data) => {
         console.log('data: ', data);
+        
         if(data[0].user != null){
+          this.user_data = data[0].user;
           this.loginUser = data[0].user.identity;
         }
         if(data[0].user == null){
           this.loginUser = "none";
         }
       });
+    console.log("loginuser",this.loginUser)
     
   }
 
@@ -79,6 +111,17 @@ export class CalendarComponent implements OnInit {
       this.update_event(res);
     });
   }
+
+  event_update() {
+    console.log("update", this.event_id, this.eventUpdate);
+    this._service.event_update(this.event_id, this.eventUpdate, (res) => {
+      this.closeModal();
+      this.update_event(res);
+    })
+  }
+  
+
+
 
   closeModal() {
     $(".modal").fadeOut();
@@ -117,6 +160,8 @@ export class CalendarComponent implements OnInit {
       if(this.saveTime.to[1] == undefined || this.saveTime.start[1] <= this.saveTime.to[1]){
         this.student.timeFrom = time;
         this.captain.timeFrom = time;
+        this.eventUpdate.timeFrom = time;
+
       }
       
     });
@@ -133,6 +178,7 @@ export class CalendarComponent implements OnInit {
       if(this.saveTime.start[1] == undefined || this.saveTime.start[1] <= this.saveTime.to[1]){
         this.student.timeTo = time;
         this.captain.timeTo = time;
+        this.eventUpdate.timeTo = time;
       }
     });
   }
@@ -149,6 +195,7 @@ export class CalendarComponent implements OnInit {
   
 
   display_calendar(eventsData) {
+    let userId = this.user_data._id;
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -162,24 +209,61 @@ export class CalendarComponent implements OnInit {
       weekMode: 'liquid',
       url: '#',
       editable: true,
-      eventClick: function (e) {
-
-        if(e.spec !== undefined) {
-          $("#myModal0").fadeIn();
-          $("#date").html(`He/She would like to set sail in: ${e.date.slice(0, 10)}`);
-          $("#title").html(`${e.title}`);
-          $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
-          $("#vessel").html(`Vessel: ${e.vessel}`);
-          $("#numCrew").html(`Number of Crew is seeking: ${e.NumOfCrew}`);
-          $("#Message").html(`Captains Log (Message): ${e.message}`);
+      eventClick: (e) => {
+        this.eventUpdate = e;
+        console.log('eventUpdate: ', this.eventUpdate);
+        this.event_created_by = e.created_by;
+        this.event_id = e._id;
+        if(this.loginUser == "none") {
+          if(e.title.includes("Crew")) {
+            $("#myModal0").fadeIn();
+            $("#date").html(`He/She would like to set sail in: ${e.date}`);
+            $("#title").html(`${e.title}`);
+            $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+            $("#vessel").html(`Vessel: ${e.vessel}`);
+            $("#numCrew").html(`Number of Crew is seeking: ${e.NumOfCrew}`);
+            $("#Message").html(`Captains Log (Message): ${e.message}`);
+          }
+          else if (e.title.includes("Vessel")) {
+            $("#myModal0").fadeIn();
+            $("#date").html(`He/She would like to set sail in: ${e.date}`);
+            $("#title").html(`${e.title}`);
+            $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+            $("#Message").html(`Message to Would-be Captains: ${e.message}`);
+          }
         }
         else {
-          $("#myModal0").fadeIn();
-          $("#date").html(`He/She would like to set sail in: ${e.date}`);
-          $("#title").html(`${e.title}`);
-          $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
-          $("#Message").html(`Message to Would-be Captains: ${e.message}`);
+          if(this.user_data._id == e.created_by) {
+            if (e.title.includes("Crew")) {
+              $("#myModal4").fadeIn();
+            }
+            else if (e.title.includes("Vessel")) {
+              $("#myModal5").fadeIn();
+            }
+          }
+          else {
+            if (e.title.includes("Crew")) {
+              $("#myModal0").fadeIn();
+              $("#date").html(`He/She would like to set sail in: ${e.date}`);
+              $("#title").html(`${e.title}`);
+              $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+              $("#vessel").html(`Vessel: ${e.vessel}`);
+              $("#numCrew").html(`Number of Crew is seeking: ${e.NumOfCrew}`);
+              $("#Message").html(`Captains Log (Message): ${e.message}`);
+            }
+            else if (e.title.includes("Vessel")) {
+              $("#myModal0").fadeIn();
+              $("#date").html(`He/She would like to set sail in: ${e.date}`);
+              $("#title").html(`${e.title}`);
+              $("#timeRange").html(`Set sail between: ${e.timeFrom} to ${e.timeTo}`);
+              $("#Message").html(`Message to Would-be Captains: ${e.message}`);
+            }
+          }
+          
         }
+        
+        
+        
 
       },
       events: eventsData,
@@ -194,7 +278,6 @@ export class CalendarComponent implements OnInit {
         
       },
       eventAfterRender: (event, element, view) => {
-        console.log(event)
         if(event.vessel !== undefined) {
           element.css('background-color', 'rgba(179, 225, 247, 1)');
           element.css('border', 'none');
@@ -228,6 +311,14 @@ export class CalendarComponent implements OnInit {
       return;
     }
     $("#myModal1").fadeOut();
+  }
+
+  delete(eventId) {
+    console.log("click", eventId);
+    this._service.delete_event(eventId, this.loginUser, (res) => {
+      this.closeModal();
+      this.update_event(res);
+    })
   }
 
 

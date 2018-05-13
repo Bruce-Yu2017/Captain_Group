@@ -85,11 +85,11 @@ export class NavbarComponent implements OnInit {
 
   studentReg() {
     this._service.registerStudent(this.student_reg, (res) => {
-      if (res.success = 'success') {
+      if (res.success === 'success') {
         this._router.navigate(['/check_email'])
       }
       else {
-        this.err_message.email = 'This email has been registered';
+        this.err_message.email = res.error;
       }
       this.student_reg = {
         name: "",
