@@ -61,8 +61,6 @@ module.exports = {
                     console.log("userinfo save err: ", err);
                   }
                   else {
-                    // res.json({success: "success register", user: new_user})
-                    
                     var transporter = nodemailer.createTransport({
                       service: 'gmail',
                       auth: {

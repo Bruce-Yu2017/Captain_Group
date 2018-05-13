@@ -67,10 +67,7 @@ export class MainService {
       }
     )
   }
-
-
-
-
+  
   createStudentEvent(event, callback) {
     this._http.post('/studentevents', { id: this.currentUser._id, event: event }).subscribe(
       (res) => {
@@ -99,6 +96,28 @@ export class MainService {
       }
     )
   };
+
+  // event_update(id, eventUpdate, callback) {
+  //   console.log("service: ",id, eventUpdate);
+  //   this._http.put('/update/' + id, eventUpdate).subscribe((res) => {
+  //     callback(res.json());
+  //   },
+  //     (err) => {
+  //       console.log("event_update err: ", err);
+  //     })
+  // }
+
+  event_update(id, data, callback) {
+    console.log("from service update: ", data);
+    this._http.put("/update/", {data: data, event_id: id}).subscribe(
+      (res) => {
+        callback(res.json());
+      },
+      (err) => {
+        console.log("event_update err: ", err);
+      })
+  }
+  
 
   updateAllEvents(data) {
     this.all_events.next(data);
@@ -139,6 +158,15 @@ export class MainService {
 
   logout() {
     localStorage.removeItem("currentUser");
+  }
+
+  delete_event(id, identity, callback) {
+    console.log("event_id: ", id);
+    this._http.delete(`/delete/${id}/${identity}`).subscribe((res) => {
+      callback(res.json());
+    }, (err) => {
+      console.log("delete event err: ", err);
+    })
   }
 
 }

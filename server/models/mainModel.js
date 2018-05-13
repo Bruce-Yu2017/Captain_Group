@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
   userInfo: { type: Schema.Types.ObjectId, ref: "UserInfo"},
   email: {type: String, required: true, index: {unique: true}},
   phone: {type: Number, required: true},
-  address: {type: String, required: true},
+  address: {type: String, required: false},
   joined_events: [{type: Schema.Types.ObjectId, ref: "Event"}],
   created_events: [{ type: Schema.Types.ObjectId, ref: "Event" }],
   experience: {type: Number},
@@ -27,26 +27,26 @@ var UserInfoSchema = new mongoose.Schema({
 var UserInfo = mongoose.model("UserInfo", UserInfoSchema);
 
 var StudentEventSchema = new mongoose.Schema({
-  date: {type: Date, required: true},
+  date: {type: Date, required: false},
   title: {type: String, required: false},
-  timeFrom: {type: String, required: true},
-  timeTo: {type: String, required: true},
-  message: {type: String, required: true},
+  timeFrom: {type: String, required: false},
+  timeTo: {type: String, required: false},
+  message: {type: String, required: false},
   created_by: {type: Schema.Types.ObjectId, ref: "User"},
   people_joined: [{ type: Schema.Types.ObjectId, ref: "User" }]
 })
 var StudentEvent = mongoose.model("StudentEvent", StudentEventSchema);
 
 var CaptainEventSchema = new mongoose.Schema({
-  date: { type: Date, required: true },
+  date: { type: Date, required: false },
   title: {type: String, required: false},  
-  timeFrom: { type: String, required: true },
-  timeTo: { type: String, required: true },
-  message: { type: String, required: true },
+  timeFrom: { type: String, required: false },
+  timeTo: { type: String, required: false },
+  message: { type: String, required: false },
   created_by: { type: Schema.Types.ObjectId, ref: "User" },
   people_joined: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  vessel: {type: String, required: true},
-  spec: {type: String, required: true},
-  NumOfCrew: {type: String, required: true}
+  vessel: {type: String, required: false},
+  spec: {type: String, required: false},
+  NumOfCrew: {type: String, required: false}
 })
 var CaptainEvent = mongoose.model("CaptainEvent", CaptainEventSchema);

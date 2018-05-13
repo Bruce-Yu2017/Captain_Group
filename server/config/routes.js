@@ -37,6 +37,21 @@ module.exports = function(app){
     events.getAllEvents(req, res);
   });
 
+  //delete events
+  app.delete("/delete/:id/:identity", function(req, res) {
+    events.deleteEvent(req, res);
+  })
+
+  //captain update
+ 
+
+  app.put("/update", function (req, res) {
+    console.log("111", req.body);
+    console.log("res: ", res);
+    events.updateEvent(req, res);
+  })
+
+
   app.all("*", function (req, res) {
     res.sendFile('index.html', { root: './client/dist' });
   })
