@@ -45,9 +45,7 @@ module.exports = function(app){
   //captain update
  
 
-  app.put("/update", function (req, res) {
-    console.log("111", req.body);
-    console.log("res: ", res);
+  app.put("/update/:id", function (req, res) {
     events.updateEvent(req, res);
   })
 

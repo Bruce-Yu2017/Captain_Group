@@ -56,16 +56,16 @@ module.exports = {
     },
 
     updateEvent: (req, res) => {
+        console.log('req: ', req.body);
         CaptainEvent.findOne({_id: req.params.id},function(err, capEvent) {
             if(err) {
                 console.log("update cap event err: ", err);
             }
             else {
                 console.log('capEvent: ', capEvent);
-                // capEvent.timeFrom = req.params.eventupdate.timeFrom;
-                // capEvent.save((err) => {
-                //     res.redirect(303, '/allevents');
-                // })
+                capEvent.save((err) => {
+                    res.redirect(303, '/allevents');
+                })
             }
         })
             
