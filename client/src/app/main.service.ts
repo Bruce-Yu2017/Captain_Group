@@ -109,8 +109,9 @@ export class MainService {
 
   event_update(id, data, callback) {
     console.log("from service update: ", data);
-    this._http.put("/update/", {data: data, event_id: id}).subscribe(
+    this._http.put("/update/"+id, {data: data}).subscribe(
       (res) => {
+        console.log('res: ', res);
         callback(res.json());
       },
       (err) => {

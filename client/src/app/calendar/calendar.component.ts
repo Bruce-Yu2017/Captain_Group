@@ -210,7 +210,15 @@ export class CalendarComponent implements OnInit {
       url: '#',
       editable: true,
       eventClick: (e) => {
-        this.eventUpdate = e;
+        this.eventUpdate = {
+          date: e.date,
+          timeFrom: e.timeFrom,
+          timeTo: e.timeTo,
+          vessel: e.vessel,
+          spec: e.spec,
+          message: e.message,
+          NumOfCrew: e.NumOfCrew
+        }
         console.log('eventUpdate: ', this.eventUpdate);
         this.event_created_by = e.created_by;
         this.event_id = e._id;
