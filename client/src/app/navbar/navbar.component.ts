@@ -32,7 +32,6 @@ export class NavbarComponent implements OnInit {
     identity: "student",
     email: "",
     phone: "",
-    address: [],
     password: ""
   }
 
@@ -85,7 +84,9 @@ export class NavbarComponent implements OnInit {
 
   studentReg() {
     this._service.registerStudent(this.student_reg, (res) => {
-      if (res.success === 'success') {
+      if (res.success === 'register pending') {
+        $(".modal-backdrop.show").hide();
+        $(".modal").hide();
         this._router.navigate(['/check_email'])
       }
       else {
@@ -96,7 +97,6 @@ export class NavbarComponent implements OnInit {
         identity: "student",
         email: "",
         phone: "",
-        address: [],
         password: ""
       }
     })
@@ -106,17 +106,27 @@ export class NavbarComponent implements OnInit {
     var modal0 = document.getElementById('myModal0');
     var modal1 = document.getElementById('myModal1');
     var modal2 = document.getElementById('myModal2');
+    var modal3 = document.getElementById('myModal3');
+    var modal4 = document.getElementById('myModal4'); 
+    var modal5 = document.getElementById('myModal5'); 
     var regform = document.getElementById("regForm");
     var loginForm = document.getElementById("loginForm");
     window.onclick = function (event) {
-      if (event.target == modal1 || event.target == modal2 || event.target == modal0 || event.target == regform || event.target == loginForm) {
+      console.log(1111)
+      if (event.target == modal1 || event.target == modal2 || event.target == modal3 || event.target == modal0 || event.target == regform || event.target == loginForm || event.target == modal4 || event.target == modal5 ) {
+        console.log(2222)
         $("#myModal0").fadeOut();
         $("#myModal1").fadeOut();
         $("#myModal2").fadeOut();
-        regform.style.display = "none";
-        $("#loginForm").hide();
+        $("#myModal3").fadeOut();
+        $("#myModal4").fadeOut();
+        $("#myModal5").fadeOut();
+        $("#regForm").fadeOut();
+        $("#loginForm").fadeOut();
       }
     }
+    
+    
     if (this._service.currentUser !== null) {
       this.logged_user = this._service.currentUser.name; 
     }

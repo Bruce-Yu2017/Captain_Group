@@ -57,20 +57,7 @@ export class CalendarComponent implements OnInit {
     this._service.getAllEvents((res) => {
       this.display_calendar(res);
     }) 
-    var modal5 = document.getElementById('myModal5');        
-    var modal4 = document.getElementById('myModal4');    
-    var modal3 = document.getElementById('myModal3');
-    var modal2 = document.getElementById('myModal2');
-    var modal1 = document.getElementById('myModal1');
-    var modal0 = document.getElementById('myModal0');
     
-    window.onclick = function (event) {
-      if (event.target == modal3 || event.target == modal2 || event.target == modal1 || event.target == modal0 || event.target == modal4 || event.target == modal5  ) {
-        $(".modal").fadeOut();
-      }
-      
-      
-    }
 
     this._service.loginstatus.subscribe(
       (data) => {

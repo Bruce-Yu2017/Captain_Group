@@ -19,10 +19,8 @@ module.exports = {
         }
         else {
           if(user === null) {
-            console.log(req.body.password);
             var salt = bcrypt.genSaltSync(saltRounds);
             var hashed_password = bcrypt.hashSync(req.body.password, salt);
-            console.log("hash", hashed_password);
             if(req.body.identity === "captain") {
               var new_user = new User({
                 name: req.body.name,
@@ -41,7 +39,6 @@ module.exports = {
                 identity: req.body.identity,
                 email: req.body.email,
                 phone: req.body.phone,
-                address: req.body.address
               });
             }
             

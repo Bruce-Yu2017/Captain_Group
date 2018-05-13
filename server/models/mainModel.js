@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
   status: {type: Number, default: 0},
   userInfo: { type: Schema.Types.ObjectId, ref: "UserInfo"},
   email: {type: String, required: true, index: {unique: true}},
-  phone: {type: Number, required: true},
+  phone: {type: Number, required: false},
   address: {type: String, required: false},
   joined_events: [{type: Schema.Types.ObjectId, ref: "Event"}],
 
