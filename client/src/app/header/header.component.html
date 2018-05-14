@@ -11,7 +11,7 @@
     <header class="wordWrapper">
       <h1>GPYC WOMEN'S SAILING PROGRAM</h1>
       <button type="submit" class="btn btn-primary btn_event_calendar" (click) ="scrollToCalendar()">Events Calendar</button>
-      <button type="submit" class="btn btn-primary btn_jump_login" (click) ="display_login()">Jump to Login</button>
+      <button type="submit" class="btn btn-primary btn_jump_login" (click) ="display_login()" *ngIf = "currentuser == ''">Jump to Login</button>
 
     </header>
 
@@ -32,7 +32,7 @@
     </div>
   </section>
   <a id="return-to-top" (click)="arrowClick($event)">
-    <i class="ion-chevron-up"></i>
+    <img src="../../assets/images/arrow_up.svg" alt="">
   </a>
 
 </body>

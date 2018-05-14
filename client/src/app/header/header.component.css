@@ -71,6 +71,10 @@ h1 {
     animation-iteration-count: infinite;
 }
 
+.arrow {
+    color: white;
+}
+
 /* Scroll Up Arrow */
 
 #return-to-top {
@@ -86,17 +90,17 @@ h1 {
     height: 1.5em;
     text-align: center;
     border-radius: 50%;
-    margin-bottom: 100px;
+    margin-bottom: 137px;
     margin-right: -18px;
 }
-/* 
+
 #return-to-top:hover {
     border: 1px solid;
-    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
-    outline-color: rgba(255, 255, 255, 0);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(90, 47, 47, 0.2);
+    outline-color: rgba(161, 204, 7, 0);
     outline-offset: 15px;
     text-shadow: 1px 1px 2px #427388;
-} */
+}
 
 /* @keyframes blink-caret {
     from,

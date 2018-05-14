@@ -36,6 +36,7 @@ export class RegPendingComponent implements OnInit {
     this._service.login(this.user_log,
       (res) => {
         if (res.error == undefined) {
+          this._service.checkLogin.next(["loged"]);
           this._router.navigate(['/']);
         }
         else {

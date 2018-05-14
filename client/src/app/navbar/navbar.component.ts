@@ -190,7 +190,8 @@ export class NavbarComponent implements OnInit {
       (res) => {
         if(res.error == undefined) {
           this.logged_user = res.name;
-          this.closeLogin()
+          this.closeLogin();
+          this._service.checkLogin.next(["loged"]);
 
         }
         else {
@@ -214,6 +215,7 @@ export class NavbarComponent implements OnInit {
       mesg: null
     }]
     this._service.updateLoginStatus(data);
+    this._service.checkLogin.next(["logout"]);
   }
 
   click() {

@@ -6,13 +6,13 @@
     </span>
     <span class="user_name" *ngIf="logged_user !== undefined ">Hi, {{logged_user}}</span>
 
-    
+
     <nav>
       <span id="menu-icon" (click)="click()"></span>
       <ul id="check_box">
         <li>
-          <button type="button" class="btn btn-primary navbar-btn" (click) ="scrollTo()">
-            <i class="ion-calendar"></i> Calendar</button>
+          <button type="button" class="btn btn-primary navbar-btn" (click)="scrollTo()">
+            <i class="icon ion-md-calendar"></i> Calendar</button>
         </li>
         <li>
           <button *ngIf="logged_user == undefined" type="submit" class="btn btn-primary" (click)="display_reg()">
@@ -47,114 +47,105 @@
           <button>Register as Student</button>
         </span>
       </div>
-      
-        <form id="cap" (submit)="capReg()" #capReg = "ngForm">
-          <h4>Register as Captain</h4>
-          <div class="form-group">
-            <label for="">Your Name</label>
-            <input type="text" class="form-control" name="name" [(ngModel)]="captain_reg.name" placeholder="Your name..." #capName="ngModel"
-              required minlength="3">
-          </div>
-          <div class="alert alert-danger" *ngIf="capName.invalid && (capName.dirty || capName.touched)">
-            <strong>User name is required and must be 3 characters long.
-            </strong>
-          </div>
 
-          <div class="form-group">
-            <label for="">Email Address</label>
-            <input type="text" class="form-control" required pattern="[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]*\.([a-z]{2,4})" name="email"
-              [(ngModel)]="captain_reg.email" placeholder="Your email..." #capEmail="ngModel">
-          </div>
+      <form id="cap" (submit)="capReg()">
+        <h4>Register as Captain</h4>
+        <div class="form-group">
+          <label for="">Your Name</label>
+          <input type="text" class="form-control" name="name" [(ngModel)]="captain_reg.name" placeholder="Your name..." #capName="ngModel"
+            required minlength="3">
+        </div>
+        <div class="alert alert-danger" *ngIf="capName.invalid && (capName.dirty || capName.touched)">
+          <strong>User name is required and must be 3 characters long.
+          </strong>
+        </div>
 
-          <div class="alert alert-danger" *ngIf="capEmail.invalid && (capEmail.dirty || capEmail.touched)">
-            <strong>Email is required.</strong>
-          </div>
-          <div class="alert alert-danger" *ngIf="err_message.email">
-            <strong>{{err_message.email}}</strong>
-          </div>
+        <div class="form-group">
+          <label for="">Email Address</label>
+          <input type="text" class="form-control" required pattern="[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]*\.([a-z]{2,4})" name="email"
+            [(ngModel)]="captain_reg.email" placeholder="Your email..." #capemail="ngModel">
+        </div>
 
-
-          <div class="form-group">
-            <label for="">Phone</label>
-            <input type="tel" class="form-control" name="phone" [(ngModel)]="captain_reg.phone" placeholder="Your Phone..." required
-              #phone="ngModel">
-          </div>
-
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" required minlength="8" name="stupassword" [(ngModel)]="captain_reg.password"
-              placeholder="Password..." #reghash="ngModel">
-          </div>
-          <div class="alert alert-danger" *ngIf="reghash.invalid && (reghash.dirty || reghash.touched)">
-            <strong> Password is required and must be 8 characters long.</strong>
-          </div>
-         
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" (click)="closeReg()">Close</button>
-            <button type="submit" class="btn btn-info" [disabled] = "capReg.invalid">Submit</button>
-          </div>
-          <br/>
-        </form>
-
-        <!-- student -->
-        <form id="student" (submit)="studentReg()" #studentReg = "ngForm">
-          <h4>Register as Student</h4>
-          <div class="form-group">
-            <label for="">Your Name</label>
-            <input type="text" class="form-control" name="name" [(ngModel)]="student_reg.name" placeholder="Your name..." #studentName="ngModel"
-              required minlength="3">
-          </div>
-          <div class="alert alert-danger" *ngIf="studentName.invalid && (studentName.dirty || studentName.touched)">
-            <strong>User name is required and must be 3 characters long.
-            </strong>
-          </div>
-
-          <div class="form-group">
-            <label for="">Email Address</label>
-            <input type="text" class="form-control" required pattern="[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]*\.([a-z]{2,4})" name="email"
-              [(ngModel)]="student_reg.email" placeholder="Your email..." #Studentemail="ngModel">
-          </div>
-          <div class="alert alert-danger" *ngIf="Studentemail.invalid && (Studentemail.dirty || Studentemail.touched)">
-            <strong>Email is required.</strong>
-          </div>
-          <div class="alert alert-danger" *ngIf="err_message.email">
-            <strong>{{err_message.email}}</strong>
-          </div>
+        <div class="alert alert-danger" *ngIf="capemail.invalid && (capemail.dirty || capemail.touched)">
+          <strong>Email is required.</strong>
+        </div>
+        <div class="alert alert-danger" *ngIf="err_message.email">
+          <strong>{{err_message.email}}</strong>
+        </div>
 
 
-          <div class="form-group">
-            <label for="">Phone</label>
-            <input type="tel" class="form-control" name="phone" [(ngModel)]="student_reg.phone" placeholder="Your Phone..." required
-              #phone="ngModel">
-          </div>
+        <div class="form-group">
+          <label for="">Phone</label>
+          <input type="tel" class="form-control" name="phone" [(ngModel)]="captain_reg.phone" placeholder="Your Phone..." required
+            #phone="ngModel">
+        </div>
 
-          
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" required minlength="8" name="stupassword" [(ngModel)]="student_reg.password" placeholder="Password..."
-              #stuhash="ngModel">
-          </div>
-          <div class="alert alert-danger" *ngIf="stuhash.invalid && (stuhash.dirty || stuhash.touched)">
-            <strong>Password is required and must be 8 characters long.</strong>
-          </div>
-<!-- 
-          <div class="form-group">
-            <label>Confirm Password</label>
-            <input type="password" [(ngModel)]="pass_con" required minlength="4" #pw_confirm="ngModel" pattern="{{student_reg.password}}"
-              placeholder="password confirmation" class="form-control" name="password">
-          </div>
-          <div class="alert alert-danger" *ngIf="pw_confirm.invalid && (pw_confirm.dirty || pw_confirm.touched)">
-            <strong>A Wow! password is not matched !!!</strong>
-          </div> -->
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" required minlength="8" name="stupassword" [(ngModel)]="captain_reg.password"
+            placeholder="Password..." #reghash="ngModel">
+        </div>
+        <div class="alert alert-danger" *ngIf="reghash.invalid && (reghash.dirty || reghash.touched)">
+          <strong>Password is required and must be 8 characters long.</strong>
+        </div>
 
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" (click)="closeReg()">Close</button>
-            <button type="submit" class="btn btn-info" [disabled] = "studentReg.invalid">Submit</button>
-          </div>
-          <br/>
-        </form>
-      
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closeReg()">Close</button>
+          <button type="submit" class="btn btn-info">Submit</button>
+        </div>
+        <br/>
+      </form>
+
+      <!-- student -->
+      <form id="student" (submit)="studentReg()">
+        <h4>Register as Student</h4>
+        <div class="form-group">
+          <label for="">Your Name</label>
+          <input type="text" class="form-control" name="name" [(ngModel)]="student_reg.name" placeholder="Your name..." #studentName="ngModel"
+            required minlength="3">
+        </div>
+        <div class="alert alert-danger" *ngIf="studentName.invalid && (studentName.dirty || studentName.touched)">
+          <strong>User name is required and must be 3 characters long.
+          </strong>
+        </div>
+
+        <div class="form-group">
+          <label for="">Email Address</label>
+          <input type="text" class="form-control" required pattern="[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]*\.([a-z]{2,4})" name="email"
+            [(ngModel)]="student_reg.email" placeholder="Your email..." #email="ngModel">
+        </div>
+        <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+          <strong>Email is required and checking the format.</strong>
+        </div>
+        <div class="alert alert-danger" *ngIf="err_message.email">
+          <strong>{{err_message.email}}</strong>
+        </div>
+
+
+        <div class="form-group">
+          <label for="">Phone</label>
+          <input type="tel" class="form-control" name="phone" [(ngModel)]="student_reg.phone" placeholder="Your Phone..." required
+            #phone="ngModel">
+        </div>
+
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" required minlength="8" name="stupassword" [(ngModel)]="student_reg.password"
+            placeholder="Password..." #stuhash="ngModel">
+        </div>
+        <div class="alert alert-danger" *ngIf="stuhash.invalid && (stuhash.dirty || stuhash.touched)">
+          <strong>Password is required and must be 8 characters long.</strong>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closeReg()">Close</button>
+          <button type="submit" class="btn btn-info">Submit</button>
+        </div>
+        <br/>
+      </form>
+
 
     </div>
   </div>
