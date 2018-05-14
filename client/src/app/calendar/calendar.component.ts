@@ -185,9 +185,6 @@ export class CalendarComponent implements OnInit {
       url: '#',
       editable: true,
       eventClick: (e) => {
-        console.log('e: ', e);
-        console.log('this.eventUpdate: ', this.eventUpdate);
-        console.log('moment(e.date): ', moment(e.date));
         this.eventUpdate = {
           title: e.title,
           date: moment(e.date).format('DD MMM YYYY'),
@@ -248,10 +245,6 @@ export class CalendarComponent implements OnInit {
           }
 
         }
-
-
-
-
       },
       events: eventsData,
 
@@ -259,13 +252,13 @@ export class CalendarComponent implements OnInit {
         if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
           this.student.date = date;
           this.captain.date = date;
-          this.date_display = moment(date).format('MMM Do YY')
+          this.date_display = moment(date).format('DD MMM YYYY');
           $('#myModal1').fadeIn();
         }
 
       },
       eventAfterRender: (event, element, view) => {
-        if(event.vessel !== undefined) {
+        if (event.vessel !== undefined) {
           element.css('background-color', 'rgba(179, 225, 247, 1)');
           element.css('border', 'none');
         }
@@ -281,8 +274,8 @@ export class CalendarComponent implements OnInit {
 
   }
 
-  req_login(state){
-    if(state == 'reg'){
+  req_login(state) {
+    if(state === 'reg') {
       let data = [{
         user: null,
         mesg: state

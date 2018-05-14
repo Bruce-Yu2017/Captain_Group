@@ -6,8 +6,8 @@ import { RegPendingComponent } from './reg-pending/reg-pending.component';
 import { CheckEmailComponent } from './check-email/check-email.component';
 
 const routes: Routes = [
-  { path:'', component: NavbarComponent },
-  { path:'activate/:token', component: RegPendingComponent },
+  { path: '', component: NavbarComponent },
+  { path: 'activate/:token', component: RegPendingComponent },
   { path: 'check_email', component: CheckEmailComponent },
 
 ];
