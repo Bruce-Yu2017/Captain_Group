@@ -42,7 +42,7 @@ module.exports = {
               });
             }
             
-            new_user.token = jwt.sign({ email: new_user.email }, secret, { expiresIn: '1h' });
+            new_user.token = jwt.sign({ email: new_user.email }, secret);
             new_user.save((err) => {
               if(err) {
                 console.log("new user save err: ", err);
@@ -69,8 +69,7 @@ module.exports = {
                     var content = `
                       <h2>Hello ${new_user.name},</h2>
                       <p>You have opened a new account in Great Pond Yacht Club. </p><br>
-                      <a href="https://greatpondyachtclubwsp.com/activate/${new_user.token}">Please activate your account here: Activate</a>
-                      <p>This link will expire in 1 hour.</p>
+                      <a href="http://localhost:8000/activate/${new_user.token}">Please activate your account here: Activate</a>
                       <h3>Greatpondyachtclub team</h3>
                       `
                     var mailOptions = {
