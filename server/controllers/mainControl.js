@@ -74,7 +74,7 @@ module.exports = {
                       <h3>Greatpondyachtclub team</h3>
                       `
                     var mailOptions = {
-                      from: 'foodreadyoh@gmail.com',
+                      from: 'gpycwsp@gmail.com',
                       to: new_user.email,
                       subject: 'Your new Greatpondyachtclub account',
                       html: content

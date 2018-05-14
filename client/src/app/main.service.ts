@@ -11,6 +11,7 @@ export class MainService {
   all_events: BehaviorSubject<any[]> = new BehaviorSubject([]);
   loginstatus: BehaviorSubject<any[]> = new BehaviorSubject([]);
   scrollDownFromHeader: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  checkLogin: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   constructor(private _http: Http) {
     if (localStorage.currentUser !== undefined) {
@@ -150,6 +151,7 @@ export class MainService {
 
   logout() {
     localStorage.removeItem("currentUser");
+    this.currentUser = null;
   }
 
   delete_event(id, identity, callback) {
