@@ -56,19 +56,54 @@ module.exports = {
     },
 
     updateEvent: (req, res) => {
-        console.log('req: ', req.body);
-        CaptainEvent.findOne({_id: req.params.id},function(err, capEvent) {
-            if(err) {
-                console.log("update cap event err: ", err);
-            }
-            else {
-                console.log('capEvent: ', capEvent);
-                capEvent.save((err) => {
-                    res.redirect(303, '/allevents');
-                })
-            }
-        })
-            
+        console.log('req: ', req.body, req.params.id);
+        if (req.body.data.title.includes("Vessel")) {
+            StudentEvent.findOne({ _id: req.params.id }, function (err, studentEvent) {
+                if (err) {
+                    console.log("update student event err: ", err);
+                }
+                else {
+                    console.log('studentEvent: ', studentEvent);
+                    studentEvent.timeFrom = req.body.data.timeFrom;
+                    studentEvent.timeTo = req.body.data.timeTo;
+                    studentEvent.message = req.body.data.message;
+                    studentEvent.save((err) => {
+                        if(err) {
+                            console.log('err: ', err);
+                        }
+                        else {
+                            res.redirect(303, '/allevents');                            
+                        }
+                    })
+                }
+            })
+        }
+        else if (req.body.data.title.includes("Crew")) {
+            CaptainEvent.findOne({ _id: req.params.id }, function (err, captainEvent) {
+                if (err) {
+                    console.log("update student event err: ", err);
+                }
+                else {
+                    console.log('captainEvent: ', captainEvent);
+                    captainEvent.timeFrom = req.body.data.timeFrom;
+                    captainEvent.timeTo = req.body.data.timeTo;
+                    captainEvent.message = req.body.data.message;
+                    captainEvent.vessel = req.body.data.vessel;
+                    captainEvent.spec = req.body.data.spec;
+                    captainEvent.NumOfCrew = req.body.data.NumOfCrew;
+                    captainEvent.save((err) => {
+                        if (err) {
+                            console.log('err: ', err);
+                        }
+                        else {
+                            res.redirect(303, '/allevents');
+                        }
+                    })
+                }
+            })
+        }
+
+
 
     }
 };

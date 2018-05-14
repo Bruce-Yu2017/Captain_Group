@@ -15,6 +15,7 @@ export class CalendarComponent implements OnInit {
   date_display;
   eventUpdate = {
     date: null,
+    title: null,
     timeFrom: null,
     timeTo: null,
     vessel: null,
@@ -98,17 +99,6 @@ export class CalendarComponent implements OnInit {
       this.update_event(res);
     });
   }
-
-  event_update() {
-    console.log("update", this.event_id, this.eventUpdate);
-    this._service.event_update(this.event_id, this.eventUpdate, (res) => {
-      this.closeModal();
-      this.update_event(res);
-    })
-  }
-  
-
-
 
   closeModal() {
     $(".modal").fadeOut();
@@ -197,8 +187,10 @@ export class CalendarComponent implements OnInit {
       url: '#',
       editable: true,
       eventClick: (e) => {
+        console.log('e: ', e);
         this.eventUpdate = {
-          date: e.date,
+          title: e.title,
+          date: moment(e.date).format("MMM Do YY"),
           timeFrom: e.timeFrom,
           timeTo: e.timeTo,
           vessel: e.vessel,
@@ -267,7 +259,7 @@ export class CalendarComponent implements OnInit {
         if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
           this.student.date = date;
           this.captain.date = date;
-          this.date_display = date.format()
+          this.date_display = moment(date).format("MMM Do YY")
           $("#myModal1").fadeIn();
         }
         
@@ -311,6 +303,14 @@ export class CalendarComponent implements OnInit {
   delete(eventId) {
     console.log("click", eventId);
     this._service.delete_event(eventId, this.loginUser, (res) => {
+      this.closeModal();
+      this.update_event(res);
+    })
+  }
+
+  event_update() {
+    console.log("update", this.event_id, this.eventUpdate);
+    this._service.event_update(this.event_id, this.eventUpdate, (res) => {
       this.closeModal();
       this.update_event(res);
     })
