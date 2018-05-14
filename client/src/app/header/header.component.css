@@ -32,7 +32,7 @@ body {
 
 .wordWrapper {
     text-align: center;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     flex-direction: column;
     left: 50% !important;
@@ -56,16 +56,7 @@ button {
     width: 350px;
 }
 
-button:hover {
-    background: #fff;
-    color: black;
-    font-weight: 900;
-    letter-spacing: 1px;
-    border: 1px solid;
-    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
-    outline: none;
-    text-shadow: 1px 1px 2px #427388;
-}
+
 
 h1 {
     color: #fff;
@@ -98,16 +89,16 @@ h1 {
     margin-bottom: 100px;
     margin-right: -18px;
 }
-
+/* 
 #return-to-top:hover {
     border: 1px solid;
     box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
     outline-color: rgba(255, 255, 255, 0);
     outline-offset: 15px;
     text-shadow: 1px 1px 2px #427388;
-}
+} */
 
-@keyframes blink-caret {
+/* @keyframes blink-caret {
     from,
     to {
         border-color: transparent;
@@ -115,9 +106,9 @@ h1 {
     50% {
         border-color: #fff;
     }
-}
+} */
 
-@keyframes typing {
+/* @keyframes typing {
     0% {
         width: 0%;
     }
@@ -133,7 +124,7 @@ h1 {
     100% {
         width: 0%;
     }
-}
+} */
 
 @media only screen and (max-width: 330px) {
     h1 {
