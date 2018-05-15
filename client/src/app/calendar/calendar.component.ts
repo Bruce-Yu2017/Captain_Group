@@ -42,7 +42,7 @@ export class CalendarComponent implements OnInit {
     timeTo: null,
     vessel: '',
     spec: '',
-    NumOfCrew: Number,
+    NumOfCrew: '',
     message: '',
   }
   loginUser = 'none';
@@ -84,13 +84,28 @@ export class CalendarComponent implements OnInit {
 
 
   student_submit() {
-    this.student.title = this._service.currentUser.name + ' seeking Vessel!';
-    this._service.createStudentEvent(this.student, (res) => {
-      console.log('res: ', res);
-      this.closeModal();
-      this.update_event(res);
-    });
-  }
+    if (this._service.currentUser.identity === 'student') {
+      this.student.title = this._service.currentUser.name + ' seeking Vessel!';
+      this._service.createStudentEvent(this.student, (res) => {
+        console.log('res: ', res);
+        this.closeModal();
+        this.update_event(res);
+      });
+    } else {
+        this.captain.title =  this._service.currentUser.name + ' seeking Vessel!';
+        this.captain.timeFrom = this.student.timeFrom;
+        this.captain.timeTo = this.student.timeTo;
+        this.captain.vessel = '';
+        this.captain.spec = '';
+        this.captain.message = this.student.message;
+        this.captain.NumOfCrew = '';
+        this._service.createCaptainEvent(this.captain, (res) => {
+          console.log('res: ', res);
+          this.closeModal();
+          this.update_event(res);
+          });
+        }
+      }
   captain_submit() {
     this.captain.title = this._service.currentUser.name + ' seeking Crew!';
     this._service.createCaptainEvent(this.captain, (res) => {
@@ -116,7 +131,7 @@ export class CalendarComponent implements OnInit {
       timeTo: null,
       vessel: '',
       spec: '',
-      NumOfCrew: Number,
+      NumOfCrew: '',
       message: '',
     }
     this.saveTime = {
@@ -150,7 +165,7 @@ export class CalendarComponent implements OnInit {
       this.saveTime.to[1] = parseInt(parts[1])*60 + parseInt(parts[2])
       this.saveTime.to[2] = parseInt(parts[1])
       this.saveTime.to[3] = parseInt(parts[2])
-      if(this.saveTime.start[1] == undefined || this.saveTime.start[1] <= this.saveTime.to[1]) {
+      if (this.saveTime.start[1] === undefined || this.saveTime.start[1] <= this.saveTime.to[1]) {
         this.student.timeTo = time;
         this.captain.timeTo = time;
         this.eventUpdate.timeTo = time;

@@ -30,11 +30,9 @@ module.exports = {
                         });
                     }
                 });
-            }else{
+            } else {
                 res.json('You are not a student!');
             }
         });
-        
     },
-
 };

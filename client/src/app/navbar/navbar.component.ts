@@ -128,7 +128,6 @@ export class NavbarComponent implements OnInit {
       }
     };
     if (this._service.currentUser !== null) {
-      // console.log('this._service.currentUser: ', this._service.currentUser);
       this.logged_user = this._service.currentUser.name;
       this.user_log.email = this._service.currentUser.email;
       this.user_log.password = this._service.currentUser.password;
@@ -152,7 +151,7 @@ export class NavbarComponent implements OnInit {
 
     this._service.loginstatus.subscribe(
       (data) => {
-        if(data[0].mesg === 'reg') {
+        if (data[0].mesg === 'reg') {
           this.display_reg();
         } else if (data[0].mesg === 'log') {
           this.display_login();
@@ -161,7 +160,7 @@ export class NavbarComponent implements OnInit {
 
     this._service.scrollDownFromHeader.subscribe((res) => {
       console.log(res);
-      if(res.length > 0) {
+      if (res.length > 0) {
         this.scrollTo();
       }
 
@@ -194,14 +193,14 @@ export class NavbarComponent implements OnInit {
   login() {
     this._service.login(this.user_log,
       (res) => {
-        if(res.error === undefined) {
+        if (res.error === undefined) {
           this.logged_user = res.name;
           this.closeLogin();
           this._service.checkLogin.next(['loged']);
 
         } else {
           this.error_message.login = res.error;
-          if(res.errorCode !== undefined) {
+          if (res.errorCode !== undefined) {
             this.error_message.code = res.errorCode;
           }
         }
@@ -218,7 +217,7 @@ export class NavbarComponent implements OnInit {
     const data = [{
       user: null,
       mesg: null
-    }]
+    }];
     this._service.updateLoginStatus(data);
     this._service.checkLogin.next(['logout']);
   }
@@ -239,7 +238,6 @@ export class NavbarComponent implements OnInit {
       if (box.style.display === 'block') {
         if (e.target !== box && e.target !== document.getElementById('menu-icon')) {
           box.style.removeProperty('display');
-
         }
       }
     });
