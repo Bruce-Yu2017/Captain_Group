@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from "./../main.service";
-import { Router } from "@angular/router";
+import { MainService } from './../main.service';
+import { Router } from '@angular/router';
 
 declare var jquery: any;
 declare var $: any;
@@ -16,41 +16,41 @@ export class NavbarComponent implements OnInit {
   logged_user;
 
   captain_reg = {
-    name: "",
-    identity: "captain",
-    email: "",
-    phone: "",
+    name: '',
+    identity: 'captain',
+    email: '',
+    phone: '',
     address: [],
-    experience: "",
-    boat_name: "",
-    spec: "",
-    password: ""
+    experience: '',
+    boat_name: '',
+    spec: '',
+    password: ''
   }
 
   student_reg = {
-    name: "",
-    identity: "student",
-    email: "",
-    phone: "",
-    password: ""
-  }
+    name: '',
+    identity: 'student',
+    email: '',
+    phone: '',
+    password: ''
+  };
 
   err_message = {
-    email: "",
-    password: ""
+    email: '',
+    password: ''
   }
 
   pass_con;
 
   error_message = {
-    email: "",
-    login: "",
+    email: '',
+    login: '',
     code: 0
   }
 
   user_log = {
-    email: "",
-    password: ""
+    email: '',
+    password: ''
   }
 
   constructor(private _service: MainService, private _router: Router) { }
@@ -59,76 +59,76 @@ export class NavbarComponent implements OnInit {
     console.log('cap reg component', this.captain_reg);
     this._service.registerCap(this.captain_reg, (res) => {
       if (res.success === 'register pending') {
-        $(".modal-backdrop.show").hide();
-        $(".modal").hide();
+        $('.modal-backdrop.show').hide();
+        $('.modal').hide();
         this._router.navigate(['/check_email']);
         this.captain_reg = {
-          name: "",
-          identity: "captain",
-          email: "",
-          phone: "",
+          name: '',
+          identity: 'captain',
+          email: '',
+          phone: '',
           address: [],
-          experience: "",
-          boat_name: "",
-          spec: "",
-          password: ""
+          experience: '',
+          boat_name: '',
+          spec: '',
+          password: ''
         }
-        this.pass_con = "";
+        this.pass_con = '';
       }
       else {
         this.err_message.email = res.error;
       }
-      
-    })
+    });
   }
 
   studentReg() {
     this._service.registerStudent(this.student_reg, (res) => {
       if (res.success === 'register pending') {
-        $(".modal-backdrop.show").hide();
-        $(".modal").hide();
+        $('.modal-backdrop.show').hide();
+        $('.modal').hide();
         this._router.navigate(['/check_email'])
       }
       else {
         this.err_message.email = res.error;
       }
       this.student_reg = {
-        name: "",
-        identity: "student",
-        email: "",
-        phone: "",
-        password: ""
-      }
-    })
+        name: '',
+        identity: 'student',
+        email: '',
+        phone: '',
+        password: ''
+      };
+    });
   }
 
   ngOnInit() {
-    var modal0 = document.getElementById('myModal0');
-    var modal1 = document.getElementById('myModal1');
-    var modal2 = document.getElementById('myModal2');
-    var modal3 = document.getElementById('myModal3');
-    var modal4 = document.getElementById('myModal4'); 
-    var modal5 = document.getElementById('myModal5'); 
-    var regform = document.getElementById("regForm");
-    var loginForm = document.getElementById("loginForm");
+    let modal0 = document.getElementById('myModal0');
+    let modal1 = document.getElementById('myModal1');
+    let modal2 = document.getElementById('myModal2');
+    let modal3 = document.getElementById('myModal3');
+    let modal4 = document.getElementById('myModal4');
+    let modal5 = document.getElementById('myModal5');
+    let regform = document.getElementById('regForm');
+    let loginForm = document.getElementById('loginForm');
     window.onclick = function (event) {
       console.log(1111)
-      if (event.target == modal1 || event.target == modal2 || event.target == modal3 || event.target == modal0 || event.target == regform || event.target == loginForm || event.target == modal4 || event.target == modal5 ) {
+      if (event.target === modal1 || event.target === modal2 || event.target === modal3
+        || event.target === modal0 || event.target === regform ||
+        event.target === loginForm || event.target === modal4 ||
+        event.target === modal5 ) {
         console.log(2222)
-        $("#myModal0").fadeOut();
-        $("#myModal1").fadeOut();
-        $("#myModal2").fadeOut();
-        $("#myModal3").fadeOut();
-        $("#myModal4").fadeOut();
-        $("#myModal5").fadeOut();
-        $("#regForm").fadeOut();
-        $("#loginForm").fadeOut();
+        $('#myModal0').fadeOut();
+        $('#myModal1').fadeOut();
+        $('#myModal2').fadeOut();
+        $('#myModal3').fadeOut();
+        $('#myModal4').fadeOut();
+        $('#myModal5').fadeOut();
+        $('#regForm').fadeOut();
+        $('#loginForm').fadeOut();
       }
-    }
-    
-    
+    };
     if (this._service.currentUser !== null) {
-      this.logged_user = this._service.currentUser.name; 
+      this.logged_user = this._service.currentUser.name;
     }
     $('#student').hide();
     $('#reg1').hide();
@@ -149,73 +149,72 @@ export class NavbarComponent implements OnInit {
 
     this._service.loginstatus.subscribe(
       (data) => {
-        if(data[0].mesg == "reg"){
+        if(data[0].mesg === 'reg'){
           this.display_reg();
-        }else if(data[0].mesg == "log"){
+        } else if(data[0].mesg === 'log') {
           this.display_login();
         }
       });
-    
+
     this._service.scrollDownFromHeader.subscribe((res) => {
       console.log(res);
       if(res.length > 0) {
         this.scrollTo();
       }
-      
+
     })
   }
 
   scrollTo() {
     $('html, body').animate({
-      scrollTop: $(".calendar").offset().top
+      scrollTop: $('.calendar').offset().top
     }, 1000);
   }
 
   display_login() {
-    $("#loginForm").fadeIn();
+    $('#loginForm').fadeIn();
   }
   display_reg() {
-    $("#regForm").fadeIn();
+    $('#regForm').fadeIn();
   }
 
   closeLogin() {
-    $("#loginForm").fadeOut();
+    $('#loginForm').fadeOut();
   }
   closeReg() {
-    $("#regForm").fadeOut();
+    $('#regForm').fadeOut();
   }
 
   login() {
-    this._service.login(this.user_log, 
+    this._service.login(this.user_log,
       (res) => {
-        if(res.error == undefined) {
+        if(res.error === undefined) {
           this.logged_user = res.name;
           this.closeLogin();
-          this._service.checkLogin.next(["loged"]);
+          this._service.checkLogin.next(['loged']);
 
-        }
-        else {
+        } else {
           this.error_message.login = res.error;
-          if(res.errorCode != undefined){
+          if(res.errorCode !== undefined) {
             this.error_message.code = res.errorCode;
           }
         }
       });
     this.user_log = {
-      email: "",
-      password: ""
+      email: '',
+      password: ''
     };
   }
 
   logout() {
     this._service.logout();
     this.logged_user = undefined;
-    let data = [{
+    const data = [{
       user: null,
       mesg: null
     }]
     this._service.updateLoginStatus(data);
-    this._service.checkLogin.next(["logout"]);
+    this._service.checkLogin.next(['logout']);
   }
 
   click() {
@@ -229,18 +228,19 @@ export class NavbarComponent implements OnInit {
   }
 
   close() {
-    document.addEventListener("click", function (e) {
-      let box = document.getElementById("check_box");
-      if (box.style.display === "block") {
-        if (e.target !== box && e.target !== document.getElementById("menu-icon")) {
-          box.style.removeProperty("display");
+    document.addEventListener('click', function (e) {
+      const box = document.getElementById('check_box');
+      if (box.style.display === 'block') {
+        if (e.target !== box && e.target !== document.getElementById('menu-icon')) {
+          box.style.removeProperty('display');
 
         }
       }
-      
-    })
+    });
     this._service.show = true;
   }
-
-
+  deleteProfile() {
+    console.log('click');
+    // this._service.delete_user(this.
+  }
 }

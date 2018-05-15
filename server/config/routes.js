@@ -15,11 +15,24 @@ module.exports = function(app){
     mainroutes.login(req, res);
   });
 
+// Get all users
+  app.get('/alllogin', function(req, res) {
+    mainroutes.getAllUsers(req, res);
+  })
+
+//delete  all users
+    app.delete("/deleteUser/:id", function(req, res) {
+      mainroutes.deleteUser(req, res);
+    })
+
 
   app.get("/activate_new/:token", function(req, res) {
     mainroutes.activate(req, res);
   })
 
+  app.delete("/delete/:id/:identity", function(req, res) {
+    events.deleteEvent(req, res);
+  })
 
 
   // create student event
@@ -43,8 +56,6 @@ module.exports = function(app){
   })
 
   //captain update
- 
-
   app.put("/update/:id", function (req, res) {
     events.updateEvent(req, res);
   })
@@ -53,6 +64,5 @@ module.exports = function(app){
   app.all("*", function (req, res) {
     res.sendFile('index.html', { root: './client/dist' });
   })
-
 };
 

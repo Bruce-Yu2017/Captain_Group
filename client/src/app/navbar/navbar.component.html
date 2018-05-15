@@ -5,7 +5,7 @@
       <span>GPYC SAILING PROGRAM</span>
     </span>
     <span class="user_name" *ngIf="logged_user !== undefined ">Hi, {{logged_user}}</span>
-
+    <button class="btn btn-danger" *ngIf="logged_user == undefined" (click)="deleteProfile()">Delete Your Profile</button>
 
     <nav>
       <span id="menu-icon" (click)="click()"></span>

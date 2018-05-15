@@ -11,6 +11,7 @@ const saltRounds = 10;
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const secret = "captain";
+
 module.exports = {
     register: (req, res) => {
       User.findOne({email: req.body.email}, (err, user) => {
@@ -173,6 +174,28 @@ module.exports = {
           }
         }
       })
+    }, 
+    getAllUsers: (req, res) => {
+      let allUsers = [];
+      User.find({}, (err, users) => {
+        if(err) {
+          res.json({err: err});
+        } else {
+          allUsers = allUsers.concat(users);
+          res.json(allUsers);
+        }
+      });
     },
-    
-}
+    deleteUser: (req, res) => {
+      var user_id = req.params.id;
+      console.log('user_id: ', user_id);
+      User.remove({ email: "havenbradley@yahoo.com" }, (err) => {
+          if (err) {
+            console.log("delete user err 2: ", err);
+          }
+          else {
+            res.redirect(303, '/alllogin');
+          }
+        })
+     }
+  } 
