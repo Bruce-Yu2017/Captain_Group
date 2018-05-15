@@ -20,8 +20,9 @@ module.exports = function(app){
     mainroutes.getAllUsers(req, res);
   })
 
-//delete  all users
-    app.delete("/deleteUser/:id", function(req, res) {
+//delete user
+    app.delete("/deleteUser/:email", function(req, res) {
+      console.log("APP.DELETE");
       mainroutes.deleteUser(req, res);
     })
 

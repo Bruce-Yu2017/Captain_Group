@@ -24,7 +24,7 @@ module.exports = {
                         user.save((err)=>{
                             if(err){
                                 res.json('Can not save user!');
-                            }else{
+                            } else {
                                 res.redirect(303,'/allevents');
                             }
                         });

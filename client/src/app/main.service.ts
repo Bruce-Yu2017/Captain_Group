@@ -153,5 +153,12 @@ export class MainService {
       console.log('delete event err: ', err);
     });
   }
+  delete_user(email, callback) {
+    console.log('Email: ', email, 'CALLBACK: ', callback);
+    this._http.delete(`/deleteUser/${email}`).subscribe((res) => {
+      callback(res.json());
+    }, (err) => {
+      console.log('delete user err', err);
+    });
+  }
 }
-

@@ -37,7 +37,5 @@ module.exports = {
                 res.json('You are not a captain!');
             }
         });
-
     },
-
 };

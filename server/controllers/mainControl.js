@@ -187,9 +187,9 @@ module.exports = {
       });
     },
     deleteUser: (req, res) => {
-      var user_id = req.params.id;
-      console.log('user_id: ', user_id);
-      User.remove({ email: "havenbradley@yahoo.com" }, (err) => {
+      var user_email = req.params.email;
+      console.log('user_email: ', user_email);
+      User.remove({ email: user_email }, (err) => {
           if (err) {
             console.log("delete user err 2: ", err);
           }

@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
     boat_name: '',
     spec: '',
     password: ''
-  }
+  };
 
   student_reg = {
     name: '',
@@ -74,8 +74,7 @@ export class NavbarComponent implements OnInit {
           password: ''
         }
         this.pass_con = '';
-      }
-      else {
+      } else {
         this.err_message.email = res.error;
       }
     });
@@ -86,9 +85,8 @@ export class NavbarComponent implements OnInit {
       if (res.success === 'register pending') {
         $('.modal-backdrop.show').hide();
         $('.modal').hide();
-        this._router.navigate(['/check_email'])
-      }
-      else {
+        this._router.navigate(['/check_email']);
+      } else {
         this.err_message.email = res.error;
       }
       this.student_reg = {
@@ -102,20 +100,21 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    let modal0 = document.getElementById('myModal0');
-    let modal1 = document.getElementById('myModal1');
-    let modal2 = document.getElementById('myModal2');
-    let modal3 = document.getElementById('myModal3');
-    let modal4 = document.getElementById('myModal4');
-    let modal5 = document.getElementById('myModal5');
-    let regform = document.getElementById('regForm');
-    let loginForm = document.getElementById('loginForm');
+    const modal0 = document.getElementById('myModal0');
+    const modal1 = document.getElementById('myModal1');
+    const modal2 = document.getElementById('myModal2');
+    const modal3 = document.getElementById('myModal3');
+    const modal4 = document.getElementById('myModal4');
+    const modal5 = document.getElementById('myModal5');
+    const regform = document.getElementById('regForm');
+    const loginForm = document.getElementById('loginForm');
+    const updateForm = document.getElementById('updateForm');
     window.onclick = function (event) {
-      console.log(1111)
+      console.log(1111);
       if (event.target === modal1 || event.target === modal2 || event.target === modal3
         || event.target === modal0 || event.target === regform ||
         event.target === loginForm || event.target === modal4 ||
-        event.target === modal5 ) {
+        event.target === modal5 || event.target === updateForm) {
         console.log(2222)
         $('#myModal0').fadeOut();
         $('#myModal1').fadeOut();
@@ -125,10 +124,15 @@ export class NavbarComponent implements OnInit {
         $('#myModal5').fadeOut();
         $('#regForm').fadeOut();
         $('#loginForm').fadeOut();
+        $('#updateForm').fadeOut();
       }
     };
     if (this._service.currentUser !== null) {
+      // console.log('this._service.currentUser: ', this._service.currentUser);
       this.logged_user = this._service.currentUser.name;
+      this.user_log.email = this._service.currentUser.email;
+      this.user_log.password = this._service.currentUser.password;
+      console.log('THIS.USER_LOG.EMAIL: ', this.user_log.email);
     }
     $('#student').hide();
     $('#reg1').hide();
@@ -149,9 +153,9 @@ export class NavbarComponent implements OnInit {
 
     this._service.loginstatus.subscribe(
       (data) => {
-        if(data[0].mesg === 'reg'){
+        if(data[0].mesg === 'reg') {
           this.display_reg();
-        } else if(data[0].mesg === 'log') {
+        } else if (data[0].mesg === 'log') {
           this.display_login();
         }
       });
@@ -162,7 +166,7 @@ export class NavbarComponent implements OnInit {
         this.scrollTo();
       }
 
-    })
+    });
   }
 
   scrollTo() {
@@ -176,6 +180,9 @@ export class NavbarComponent implements OnInit {
   }
   display_reg() {
     $('#regForm').fadeIn();
+  }
+  display_update() {
+    $('#updateForm').fadeIn();
   }
 
   closeLogin() {
@@ -241,6 +248,10 @@ export class NavbarComponent implements OnInit {
   }
   deleteProfile() {
     console.log('click');
-    // this._service.delete_user(this.
+    console.log('this._service.currentUser.email: ', this._service.currentUser.email);
+    this._service.delete_user(this._service.currentUser.email, (res) => {
+    this.close();
+    this.logout();
+    });
   }
 }

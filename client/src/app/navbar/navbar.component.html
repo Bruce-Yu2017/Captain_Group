@@ -5,11 +5,15 @@
       <span>GPYC SAILING PROGRAM</span>
     </span>
     <span class="user_name" *ngIf="logged_user !== undefined ">Hi, {{logged_user}}</span>
-    <button class="btn btn-danger" *ngIf="logged_user == undefined" (click)="deleteProfile()">Delete Your Profile</button>
+
 
     <nav>
       <span id="menu-icon" (click)="click()"></span>
       <ul id="check_box">
+        <li>
+            <button *ngIf="logged_user !== undefined" type="submit" class="btn btn-primary update-button" (click)="display_update()">
+                <i class="ion-android-boat"></i> Update Profile</button>
+        </li>
         <li>
           <button type="button" class="btn btn-primary navbar-btn" (click)="scrollTo()">
             <i class="icon ion-md-calendar"></i> Calendar</button>
@@ -203,4 +207,11 @@
 
   <app-calendar class="calendar"></app-calendar>
   <app-footer></app-footer>
+
+  <div id="updateForm" class="modal">
+    <div class="modal-content">
+      <h4>Want to Change From Student to Captain (or update your email)? Delete your student profile and create your new Captain profile!</h4>
+      <button class="btn btn-danger" *ngIf="logged_user !== undefined" (click)="deleteProfile()">Delete Your Profile</button>
+    </div>
+  </div>
 </div>
