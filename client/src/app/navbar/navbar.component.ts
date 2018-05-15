@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
   err_message = {
     email: '',
     password: ''
-  }
+  };
 
   pass_con;
 
@@ -46,12 +46,12 @@ export class NavbarComponent implements OnInit {
     email: '',
     login: '',
     code: 0
-  }
+  };
 
   user_log = {
     email: '',
     password: ''
-  }
+  };
 
   constructor(private _service: MainService, private _router: Router) { }
 
@@ -72,7 +72,7 @@ export class NavbarComponent implements OnInit {
           boat_name: '',
           spec: '',
           password: ''
-        }
+        };
         this.pass_con = '';
       } else {
         this.err_message.email = res.error;
@@ -115,7 +115,7 @@ export class NavbarComponent implements OnInit {
         || event.target === modal0 || event.target === regform ||
         event.target === loginForm || event.target === modal4 ||
         event.target === modal5 || event.target === updateForm) {
-        console.log(2222)
+        console.log(2222);
         $('#myModal0').fadeOut();
         $('#myModal1').fadeOut();
         $('#myModal2').fadeOut();
@@ -142,14 +142,13 @@ export class NavbarComponent implements OnInit {
       $('#cap').show(100);
       $('#reg1').hide();
       $('#reg2').show();
-    })
+    });
     $('#reg2').click(function () {
       $('#student').show(100);
       $('#cap').hide(100);
       $('#reg1').show();
       $('#reg2').hide();
-
-    })
+    });
 
     this._service.loginstatus.subscribe(
       (data) => {

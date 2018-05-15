@@ -70,7 +70,7 @@ module.exports = {
                     var content = `
                       <h2>Hello ${new_user.name},</h2>
                       <p>You have opened a new account in Great Pond Yacht Club. </p><br>
-                      <a href="http://localhost:8000/activate/${new_user.token}">Please activate your account here: Activate</a>
+                      <a href="https://greatpondyachtclubwsp.com/activate/${new_user.token}">Please activate your account here: Activate</a>
                       <h3>Greatpondyachtclub team</h3>
                       `
                     var mailOptions = {
