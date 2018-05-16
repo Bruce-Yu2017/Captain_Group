@@ -161,4 +161,21 @@ export class MainService {
       console.log('delete user err', err);
     });
   }
+  forgetpw(email, callback) {
+    console.log(email);
+    this._http.post('/forgetpw', {email: email}).subscribe((res)=>{
+      callback(res.json());
+    },(err) => {
+      if(err){
+        console.log("forget password error", err);
+      }
+    });
+  }
+  resetpw(token, password, callback){
+    this._http.put('resetpw', {token:token, password:password}).subscribe((res)=>{
+      callback(res.json());
+    },(err) => {
+      console.log("reset password error", err);      
+    });
+  }
 }

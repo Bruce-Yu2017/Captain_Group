@@ -1,0 +1,27 @@
+<div class="centered">
+    
+      <form (submit)="forgetpw()" id="login-form" role="form">
+        <h2>Forgot your account's password? Enter your email address and we'll send you a recovery link.</h2>
+    
+        <div class="form-group">
+          <label for="">Your Email: </label>
+          <input type="text" class="form-control" id="login-username" placeholder="Enter Email..." name="email" [(ngModel)]="inputEmail"
+            #log_email="ngModel" required>
+          <div *ngIf="log_email.invalid && (log_email.dirty || log_email.touched)">
+            <div class="alert alert-dismissible alert-danger aler_log" role="alert">
+              <div *ngIf="log_email.errors.required">
+                <span> Email is required.</span>
+              </div>
+            </div>
+          </div>
+          <p *ngIf = "error_message !== null">{{error_message}}</p>
+        </div>
+    
+        <div class="modal-footer">
+          <button id="btn-login" class="btn btn-success">Send Recovery Email</button>
+        </div>
+        <p *ngIf="getEmail==true">A recovery link has been send to your Email</p>
+        
+        <br/>
+      </form>
+    </div>

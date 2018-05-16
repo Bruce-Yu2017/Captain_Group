@@ -70,7 +70,7 @@ module.exports = {
                     var content = `
                       <h2>Hello ${new_user.name},</h2>
                       <p>You have opened a new account in Great Pond Yacht Club. </p><br>
-                      <a href="https://greatpondyachtclubwsp.com/activate/${new_user.token}">Please activate your account here: Activate</a>
+                      <a href="http://localhost:8000/activate/${new_user.token}">Please activate your account here: Activate</a>
                       <h3>Greatpondyachtclub team</h3>
                       `
                     var mailOptions = {
@@ -197,5 +197,72 @@ module.exports = {
             res.redirect(303, '/alllogin');
           }
         })
-     }
+     },
+
+     forgetpw: (req, res) => {
+      User.findOne({ email: req.body.email }, function (err, user) {
+        if (err) {
+          console.log(err);          
+        } else {
+          if (!user) {
+            res.json({err: "This email is invalid."});
+          } else {
+            var transporter = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                user: 'gpycwsp@gmail.com',
+                pass: 'WomenRuleGPYC'
+              }
+            });
+  
+            var content = `
+              Hello,<br><br> You recently request a password rest link. Please click on the link below to reset your password: <br><br>
+              <a href="http://localhost:8000/reset/${user.token}">Reset Password</a>
+              `
+  
+            var mailList = [
+              user.email
+            ]
+  
+            var mailOptions = {
+              from: 'gpycwsp@gmail.com',
+              to: mailList,
+              subject: 'Rest Password Link Request',
+              html: content
+            };
+  
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);
+                res.json({succ: "success send recovery link."})
+              }
+            });
+          }
+        }
+      })  
+    },
+
+    resetpw(req, res){
+      User.findOne({ token: req.body.token }, function(error, user) {
+        UserInfo.findOne({user:user._id}, function(err, userInfo){
+          if(err){
+            console.log("find user info err",err);
+          }else{
+            var salt = bcrypt.genSaltSync(saltRounds);
+            var hashed_password = bcrypt.hashSync(req.body.password, salt);
+            userInfo.password = hashed_password;
+            userInfo.save((err)=>{
+              if(err){
+                console.log(err);
+              }else{
+                res.json("success reset password")
+              }
+            })
+          }
+        })
+
+      })
+    }
   } 
