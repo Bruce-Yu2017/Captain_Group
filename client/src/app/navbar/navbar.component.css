@@ -204,6 +204,12 @@ p {
     margin-bottom: 20px;
 }
 
+.forgetpw{
+    text-decoration: underline;
+    color: blue;
+    padding-left: 0;
+}
+
 @media only screen and (max-width: 970px) {
     header {
         position: fixed;

@@ -31,9 +31,17 @@ module.exports = function(app){
     mainroutes.activate(req, res);
   })
 
+  app.post('/forgetpw',(req, res) =>{
+    mainroutes.forgetpw(req, res);
+  })
+
+  app.put('/resetpw',(req, res) =>{
+    mainroutes.resetpw(req, res);
+  })
+
   app.delete("/delete/:id/:identity", function(req, res) {
     events.deleteEvent(req, res);
-  })
+  });
 
 
   // create student event
