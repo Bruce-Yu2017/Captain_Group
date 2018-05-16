@@ -216,7 +216,7 @@ module.exports = {
             });
   
             var content = `
-              Hello,<br><br> You recently request a password rest link. Please click on the link below to reset your password: <br><br>
+              Hello,<br><br> You recently requested a password reset link. Please click on the link below to reset your password: <br><br>
               <a href="http://localhost:8000/reset/${user.token}">Reset Password</a>
               `
   
