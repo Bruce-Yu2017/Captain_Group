@@ -180,7 +180,7 @@
           <label>Password</label>
           <input id="login-password" type="password" class="form-control" placeholder="Enter Password..." name="password" [(ngModel)]="user_log.password"
             #log_password="ngModel" required>
-          <p class="forgetpw" [routerLink]="['/forgetpw']">forget password?</p>
+          <p class="forgetpw" [routerLink]="['/forgetpw']">forgot password?</p>
           <div *ngIf="log_password.invalid && (log_password.dirty || log_password.touched)">
             <div class="alert alert-dismissible alert-danger aler_log" role="alert">
               <div *ngIf="log_password.errors">
